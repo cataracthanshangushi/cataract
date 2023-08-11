@@ -135,9 +135,3 @@
 - `workflow` 工作流改进
 - `ci` 持续集成
 
-## 联系我们
-
-> 欢迎添加开发者微信，备注「有来」进群
-
-| ![郝先瑞](https://s2.loli.net/2022/04/06/yRx8uzj4emA5QVr.jpg) | ![张川](https://s2.loli.net/2022/04/06/cQihGv9uPsTjXk1.jpg) |
-| --- | --- |
