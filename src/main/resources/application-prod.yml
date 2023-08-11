@@ -46,12 +46,12 @@ auth:
 
 # MinIO 分布式文件系统
 minio:
-  endpoint: http://www.youlai.tech:9000
+  endpoint: http://www.taitan.tech:9000
   access-key: minioadmin
   secret-key: youlaitech
-  bucket-name: youlai-boot
+  bucket-name: taitan-boot
   # 自定义域名(非必须)，Nginx配置反向代理转发文件路径
-  custom-domain: https://oss.youlai.tech
+  custom-domain: https://oss.taitan.tech
 
 # 接口文档
 springdoc:

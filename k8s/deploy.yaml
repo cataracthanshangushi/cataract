@@ -2,10 +2,10 @@
 apiVersion: apps/v1
 kind: Deployment # 无状态部署
 metadata: # 资源元数据
-  name: youlai-boot
-  namespace: youlai-bootnfckx
+  name: taitan-boot
+  namespace: taitan-bootnfckx
   labels:
-    app: youlai-boot
+    app: taitan-boot
 spec: # 资源规约
   replicas: 1 # 告知 Deployment 运行 1 个与该模板匹配的 Pod (默认1)
   strategy:
@@ -15,15 +15,15 @@ spec: # 资源规约
       maxUnavailable: 25% # 100个pod，可关闭25旧的个pod
   selector: # 圈定Deployment管理的Pod范围
     matchLabels:
-      app: youlai-boot # 必须匹配 spec.template.metadata.labels
+      app: taitan-boot # 必须匹配 spec.template.metadata.labels
   template:
     metadata:
       labels:
-        app: youlai-boot #必须匹配 spec.selector.matchLabels
+        app: taitan-boot #必须匹配 spec.selector.matchLabels
     spec:
       containers:
-        - name: youlai-boot # 容器名称
-          image: registry.cn-hangzhou.aliyuncs.com/youlaitech/youlai-boot:latest # 容器镜像地址 (常用镜像仓库：aliyun容器镜像服务/Docker Hub/Harbor企业级私有镜像)
+        - name: taitan-boot # 容器名称
+          image: registry.cn-hangzhou.aliyuncs.com/youlaitech/taitan-boot:latest # 容器镜像地址 (常用镜像仓库：aliyun容器镜像服务/Docker Hub/Harbor企业级私有镜像)
           imagePullPolicy: Always # 镜像拉取策略（Always-总是拉取镜像（默认）；IfNotPresent：本地有则不拉取镜像；Never：只使用本地镜像从不拉取）
           ports:
             - containerPort: 8989
@@ -37,26 +37,26 @@ spec: # 资源规约
               cpu: 256m # CPU 1核心 = 1000m
               memory: 512Mi # 内存 1G = 1000Mi
           volumeMounts: # 容器目录挂载配置
-            - mountPath: /logs/youlai-boot # 容器要挂载的目录
+            - mountPath: /logs/taitan-boot # 容器要挂载的目录
               name: log-volume # 日志数据卷名称，和下文 volumes 配置的名称需一致
 
       volumes: # 数据卷
         - name: log-volume # 日志数据卷名称
           hostPath:
-            path: /logs/youlai-boot # 宿主机目录
+            path: /logs/taitan-boot # 宿主机目录
             type: DirectoryOrCreate # 目录不存在则创建
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: youlai-boot
+  name: taitan-boot
   labels:
-    app: youlai-boot
-  namespace: youlai-bootnfckx
+    app: taitan-boot
+  namespace: taitan-bootnfckx
 spec:
   selector:
-    app: youlai-boot
+    app: taitan-boot
   ports:
     - name: http # 端口名称
       protocol: TCP # 协议类型

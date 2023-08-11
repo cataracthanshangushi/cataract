@@ -2,19 +2,19 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: test
-  namespace: youlai-bootnfckx
+  namespace: taitan-bootnfckx
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx # 关联的ingress-nginx控制器
   rules:
-    - host: boot.youlai.tech
+    - host: boot.taitan.tech
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: youlai-boot
+                name: taitan-boot
                 port:
                   number: 8989
