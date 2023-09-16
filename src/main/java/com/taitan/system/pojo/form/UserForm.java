@@ -25,6 +25,9 @@ public class UserForm {
     @NotBlank(message = "用户名不能为空")
     private String username;
 
+    @Schema(description="密码")
+    private String password;
+
     @Schema(description="昵称")
     @NotBlank(message = "昵称不能为空")
     private String nickname;

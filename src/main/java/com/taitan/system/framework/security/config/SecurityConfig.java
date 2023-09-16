@@ -5,7 +5,6 @@ import com.taitan.system.framework.security.filter.JwtAuthenticationFilter;
 import com.taitan.system.framework.security.exception.MyAccessDeniedHandler;
 import com.taitan.system.framework.security.exception.MyAuthenticationEntryPoint;
 import com.taitan.system.framework.security.JwtTokenManager;
-import com.taitan.system.framework.security.filter.VerifyCodeFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -53,7 +52,7 @@ public class SecurityConfig {
         ;
 
         // 验证码校验过滤器
-        http.addFilterBefore(new VerifyCodeFilter(),UsernamePasswordAuthenticationFilter.class);
+//        http.addFilterBefore(new VerifyCodeFilter(),UsernamePasswordAuthenticationFilter.class);
         // JWT 校验过滤器
         http.addFilterBefore(new JwtAuthenticationFilter(jwtTokenManager), UsernamePasswordAuthenticationFilter.class);
 
@@ -74,7 +73,8 @@ public class SecurityConfig {
                         "/doc.html",
                         "/swagger-resources/**",
                         "/v3/api-docs/**",
-                        "/swagger-ui/**"
+                        "/swagger-ui/**",
+                        "/api/v1/auth/register"
                 );
     }
 
