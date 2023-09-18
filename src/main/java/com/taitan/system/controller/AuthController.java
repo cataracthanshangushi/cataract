@@ -45,7 +45,6 @@ public class AuthController {
     private final EasyCaptchaService easyCaptchaService;
     private final RedisTemplate redisTemplate;
     private final SysUserService userService;
-    private final SysUserService userService;
     private final PasswordEncoder passwordEncoder;
 
     @Operation(summary = "登录")
