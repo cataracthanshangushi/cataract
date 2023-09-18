@@ -1,6 +1,7 @@
 package com.taitan.system.controller;
 
 import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.taitan.system.common.constant.SecurityConstants;
 import com.taitan.system.common.result.Result;
 import com.taitan.system.common.util.RequestUtils;
@@ -8,6 +9,8 @@ import com.taitan.system.framework.easycaptcha.service.EasyCaptchaService;
 import com.taitan.system.pojo.dto.CaptchaResult;
 import com.taitan.system.pojo.dto.LoginResult;
 import com.taitan.system.framework.security.JwtTokenManager;
+import com.taitan.system.pojo.entity.SysUser;
+import com.taitan.system.service.SysUserService;
 import io.jsonwebtoken.Claims;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -21,6 +24,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -36,6 +40,8 @@ public class AuthController {
     private final JwtTokenManager jwtTokenManager;
     private final EasyCaptchaService easyCaptchaService;
     private final RedisTemplate redisTemplate;
+    private final SysUserService userService;
+    private final PasswordEncoder passwordEncoder;
 
     @Operation(summary = "登录")
     @PostMapping("/login")
@@ -85,6 +91,29 @@ public class AuthController {
     public Result getCaptcha() {
         CaptchaResult captcha = easyCaptchaService.getCaptcha();
         return Result.success(captcha);
+    }
+
+    @Operation(summary = "用户修改密码")
+    @PostMapping("/updatePassword")
+    public Result updatePassword(
+            @Parameter(description = "用户名", example = "admin") @RequestParam String username,
+            @Parameter(description = "密码", example = "123456") @RequestParam String password,
+            @Parameter(description = "新密码", example = "123456789") @RequestParam String newPassword
+    ) {
+        boolean result=false;
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+                username.toLowerCase().trim(),
+                password
+        );
+        Authentication authentication = authenticationManager.authenticate(authenticationToken);
+        if(authentication.isAuthenticated()){
+            result = userService.update(new LambdaUpdateWrapper<SysUser>()
+                    .eq(SysUser::getUsername, username)
+                    .set(SysUser::getPassword, passwordEncoder.encode(newPassword))
+            );
+        }
+        return Result.judge(result);
+
     }
 
 }
