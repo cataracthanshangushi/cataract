@@ -237,8 +237,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     public UserInfoVO getUserLoginInfo() {
         // 登录用户entity
+        String username = SecurityUtils.getUser().getUsername();
         SysUser user = this.getOne(new LambdaQueryWrapper<SysUser>()
-                .eq(SysUser::getUsername, SecurityUtils.getUser().getUsername())
+                .eq(SysUser::getUsername, username)
                 .select(
                         SysUser::getId,
                         SysUser::getNickname,
@@ -247,7 +248,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         );
         // entity->VO
         UserInfoVO userInfoVO = userConverter.entity2UserInfoVo(user);
-
+        userInfoVO.setUsername(username);
         // 用户角色集合
         Set<String> roles = SecurityUtils.getRoles();
         userInfoVO.setRoles(roles);
