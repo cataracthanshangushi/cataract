@@ -20,6 +20,11 @@ public class RedisTests {
     @Autowired
     private  RedisTemplate redisTemplate;
 
+    @Test
+    public void testRedis() {
+        System.out.println();
+    }
+
     /**
      * Redis 序列化测试
      */

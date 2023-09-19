@@ -64,4 +64,13 @@ springdoc:
 easycaptcha:
   enable: true
   type: arithmetic
-  ttl: 120
+  ttl: 12
+
+#短信服务
+alicloud:
+  sms:
+    accessKeyId: aWjSapoPzD8UV6rzc
+    accessKeySecret: cA7F5hinHKCeXvADJx35O
+    signName: 我的短信
+    templateCode: SMS_11111
+    endpoint: dysmsapi.aliyuncs.com
