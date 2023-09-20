@@ -248,19 +248,22 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
                 .select(
                         SysUser::getId,
                         SysUser::getNickname,
-                        SysUser::getAvatar
+                        SysUser::getAvatar,
+                        SysUser::getBirthday,
+                        SysUser::getOccupation,
+                        SysUser::getProfession
                 )
         );
         // entity->VO
         UserInfoVO userInfoVO = userConverter.entity2UserInfoVo(user);
         userInfoVO.setUsername(username);
         // 用户角色集合
-        Set<String> roles = SecurityUtils.getRoles();
-        userInfoVO.setRoles(roles);
-
-        // 用户权限集合
-        Set<String> perms = (Set<String>) redisTemplate.opsForValue().get("USER_PERMS:" + user.getId());
-        userInfoVO.setPerms(perms);
+//        Set<String> roles = SecurityUtils.getRoles();
+//        userInfoVO.setRoles(roles);
+//
+//        // 用户权限集合
+//        Set<String> perms = (Set<String>) redisTemplate.opsForValue().get("USER_PERMS:" + user.getId());
+//        userInfoVO.setPerms(perms);
 
         return userInfoVO;
     }

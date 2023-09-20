@@ -27,10 +27,19 @@ public class UserInfoVO {
     @Schema(description="头像地址")
     private String avatar;
 
-    @Schema(description="用户角色编码集合")
-    private Set<String> roles;
+    @Schema(description="用户生日")
+    private String birthday;
 
-    @Schema(description="用户权限标识集合")
-    private Set<String> perms;
+    @Schema(description="用户职业")
+    private String occupation;
+
+    @Schema(description="用户职称")
+    private String profession;
+
+//    @Schema(description="用户角色编码集合")
+//    private Set<String> roles;
+//
+//    @Schema(description="用户权限标识集合")
+//    private Set<String> perms;
 
 }

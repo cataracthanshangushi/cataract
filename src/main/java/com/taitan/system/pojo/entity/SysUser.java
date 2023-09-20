@@ -65,5 +65,17 @@ public class SysUser extends BaseEntity {
      * 逻辑删除标识(0:未删除;1:已删除)
      */
     private Integer deleted;
+    /**
+     * 用户生日
+     */
+    private String birthday;
+    /**
+     * 用户职业
+     */
+    private String occupation;
+    /**
+     * 用户职称
+     */
+    private String profession;
 
 }
