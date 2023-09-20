@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-@Tag(name = "07.文件接口")
+@Tag(name = "图片接口")
 @RestController
 @RequestMapping("/api/v1/picture")
 @RequiredArgsConstructor
