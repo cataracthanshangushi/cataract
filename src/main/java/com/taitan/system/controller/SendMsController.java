@@ -19,11 +19,18 @@ public class SendMsController {
 
     @GetMapping("/sendcode")
     @Operation(summary = "发短信")
-    public Result uploadFile(
+    public Result sendcode(
+            @Parameter(description = "手机号") @RequestParam String phone
+    ) {
+        return Result.judge(aliSmsService.sendCode(phone));
+    }
+
+    @GetMapping("/checkcode")
+    @Operation(summary = "验证短信")
+    public Result checkcode(
             @Parameter(description = "手机号") @RequestParam String phone,
             @Parameter(description = "验证码") @RequestParam String code
     ) {
-        return Result.judge(aliSmsService.sendCode(phone,code));
+        return Result.judge(aliSmsService.checkCode(phone,code));
     }
-
 }

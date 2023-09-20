@@ -64,7 +64,7 @@ springdoc:
 easycaptcha:
   enable: true
   type: arithmetic
-  ttl: 12
+  ttl: 120
 
 #短信服务
 alicloud:
