@@ -9,7 +9,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taitan.system.mapper.ProContactMapper;
 import com.taitan.system.pojo.entity.ProContact;
 import com.taitan.system.service.ProContactService;
-import com.taitan.system.service.SysMenuService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

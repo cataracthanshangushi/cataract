@@ -22,10 +22,7 @@ import com.taitan.system.pojo.query.UserPageQuery;
 import com.taitan.system.pojo.vo.UserExportVO;
 import com.taitan.system.pojo.vo.UserInfoVO;
 import com.taitan.system.pojo.vo.UserPageVO;
-import com.taitan.system.service.SysMenuService;
-import com.taitan.system.service.SysRoleService;
-import com.taitan.system.service.SysUserRoleService;
-import com.taitan.system.service.SysUserService;
+import com.taitan.system.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -58,6 +55,10 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     private final SysRoleService roleService;
 
     private final RedisTemplate redisTemplate;
+
+    private final ProContactService proContactService;
+
+    private final ProductDetailService productDetailService;
 
     /**
      * 获取用户分页列表
@@ -257,6 +258,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         // entity->VO
         UserInfoVO userInfoVO = userConverter.entity2UserInfoVo(user);
         userInfoVO.setUsername(username);
+
+        Long userId = user.getId();
         // 用户角色集合
 //        Set<String> roles = SecurityUtils.getRoles();
 //        userInfoVO.setRoles(roles);
@@ -265,6 +268,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 //        Set<String> perms = (Set<String>) redisTemplate.opsForValue().get("USER_PERMS:" + user.getId());
 //        userInfoVO.setPerms(perms);
 
+        userInfoVO.setProContact(proContactService.getProContactByUserId(userId));
+        userInfoVO.setProductDetail(productDetailService.getProDetailByUserId(userId));
         return userInfoVO;
     }
 
