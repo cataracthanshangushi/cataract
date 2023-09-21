@@ -22,6 +22,7 @@ public class ProContact extends BaseEntity {
 
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
+    private Integer userId;
     private String contactTel;
     private String contactPhone;
     private String companyName;
