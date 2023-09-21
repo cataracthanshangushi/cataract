@@ -9,7 +9,7 @@ import lombok.Data;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author zoubo
@@ -20,8 +20,8 @@ import lombok.Data;
 public class ProductDetail extends BaseEntity {
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
-    private Integer userId;
+    private Long id;
+    private Long userId;
     private String productName;
     private String cover;
     private String proIntroduction;

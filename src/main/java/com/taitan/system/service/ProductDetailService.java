@@ -5,6 +5,8 @@ import com.taitan.system.pojo.entity.ProContact;
 import com.taitan.system.pojo.entity.ProductDetail;
 import com.taitan.system.pojo.form.DeptForm;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -24,5 +26,7 @@ public interface ProductDetailService extends IService<ProductDetail> {
 
 
     ProductDetail getProductDetail(Long id);
+
+    List<ProductDetail> getProDetailByUserId(Long userid);
 
 }

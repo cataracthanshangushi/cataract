@@ -3,6 +3,8 @@ package com.taitan.system.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taitan.system.pojo.entity.ProContact;
 
+import java.util.List;
+
 
 /**
  * <p>
@@ -24,5 +26,8 @@ public interface ProContactService extends IService<ProContact> {
 
 
     ProContact getProContact(Long id);
+
+
+    List<ProContact> getProContactByUserId(Long userid);
 
 }
