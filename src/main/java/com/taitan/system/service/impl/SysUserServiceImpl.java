@@ -273,5 +273,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         return userInfoVO;
     }
 
+    @Override
+    public boolean checkUserName(String username) {
+        UserAuthInfo userAuthInfo=this.baseMapper.getUserAuthInfo(username);
+        return ObjectUtil.isNotEmpty(userAuthInfo);
+    }
+
 
 }

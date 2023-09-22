@@ -69,11 +69,12 @@ public class SecurityConfig {
         return (web) -> web.ignoring()
                 .requestMatchers(
                         "/api/v1/auth/**",
+                        "/api/v1/message/**",
                         "/webjars/**",
                         "/doc.html",
-                        "/swagger-resources/**",
-                        "/v3/api-docs/**",
-                        "/swagger-ui/**"
+//                        "/swagger-resources/**",
+                        "/v3/api-docs/**"
+//                        "/swagger-ui/**"
                 );
     }
 

@@ -99,4 +99,11 @@ public interface SysUserService extends IService<SysUser> {
      * @return
      */
     UserInfoVO getUserLoginInfo();
+
+    /**
+     * 检查用户是否存在
+     *
+     * @return
+     */
+    boolean checkUserName(String username);
 }

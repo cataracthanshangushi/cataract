@@ -37,7 +37,7 @@ public class ProductDetailServiceImpl extends ServiceImpl<ProductDetailMapper, P
     }
 
     @Override
-    public Long updateProductDetail(Long id, ProductDetail productDetail) {
+    public Long updateProductDetail(ProductDetail productDetail) {
         this.updateById(productDetail);
         return productDetail.getId();
     }

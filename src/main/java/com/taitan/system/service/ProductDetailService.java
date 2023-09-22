@@ -19,7 +19,7 @@ public interface ProductDetailService extends IService<ProductDetail> {
     Long saveProductDetail(ProductDetail productDetail);
 
 
-    Long updateProductDetail(Long id, ProductDetail productDetail);
+    Long updateProductDetail(ProductDetail productDetail);
 
 
     boolean deleteByIds(String ids);

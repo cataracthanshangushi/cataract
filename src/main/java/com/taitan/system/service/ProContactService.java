@@ -19,7 +19,7 @@ public interface ProContactService extends IService<ProContact> {
     Long saveProContact(ProContact proContact);
 
 
-    Long updateProContact(Long id, ProContact proContact);
+    Long updateProContact(ProContact proContact);
 
 
     boolean deleteByIds(String ids);

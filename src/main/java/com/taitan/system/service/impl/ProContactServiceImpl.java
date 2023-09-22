@@ -37,7 +37,7 @@ public class ProContactServiceImpl extends ServiceImpl<ProContactMapper, ProCont
     }
 
     @Override
-    public Long updateProContact(Long id, ProContact proContact) {
+    public Long updateProContact(ProContact proContact) {
         this.updateById(proContact);
         return proContact.getId();
     }
