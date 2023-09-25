@@ -82,7 +82,7 @@ public class SysUserController {
 
     @Operation(summary = "修改用户", security = {@SecurityRequirement(name = "Authorization")})
     @PutMapping(value = "/{userId}")
-    @PreAuthorize("@pms.hasPermission('sys:user:edit')")
+//    @PreAuthorize("@pms.hasPermission('sys:user:edit')")
     public Result updateUser(
             @Parameter(description = "用户ID") @PathVariable Long userId,
             @RequestBody @Validated UserForm userForm) {
