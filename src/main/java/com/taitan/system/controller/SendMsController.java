@@ -1,12 +1,19 @@
 package com.taitan.system.controller;
 
+import com.taitan.system.common.constant.SecurityConstants;
 import com.taitan.system.common.result.Result;
+import com.taitan.system.framework.security.JwtTokenManager;
+import com.taitan.system.pojo.dto.LoginResult;
 import com.taitan.system.service.AliSmsService;
 import com.taitan.system.service.SysUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -19,6 +26,39 @@ public class SendMsController {
     private final AliSmsService aliSmsService;
 
     private final SysUserService userService;
+
+    private final AuthenticationManager authenticationManager;
+
+    private final JwtTokenManager jwtTokenManager;
+
+
+    @Operation(summary = "短信登录")
+    @PostMapping("/login")
+    public Result login(
+            @Parameter(description = "用户名") @RequestParam String phone,
+            @Parameter(description = "验证码") @RequestParam String code
+    ) {
+        if(userService.checkUserName(phone)){
+            if(aliSmsService.checkCode(phone,code)){
+                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+                        phone.toLowerCase().trim(),
+                        SecurityConstants.CUSTOM_LOGIN_SMS
+                );
+                Authentication authentication = authenticationManager.authenticate(authenticationToken);
+                // 生成token
+                String accessToken = jwtTokenManager.createToken(authentication);
+                LoginResult loginResult = LoginResult.builder()
+                        .tokenType("Bearer")
+                        .accessToken(accessToken)
+                        .build();
+                return Result.success(loginResult);
+            }else{
+                return Result.failed("验证码错误");
+            }
+        }else{
+            return Result.failed("用户不存在");
+        }
+    }
 
     @GetMapping("/sendcode")
     @Operation(summary = "发短信")

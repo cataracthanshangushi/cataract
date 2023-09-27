@@ -37,4 +37,10 @@ public interface SecurityConstants {
      * 黑名单Token缓存前缀
      */
     String BLACK_TOKEN_CACHE_PREFIX = "AUTH:BLACK_TOKEN:";
+
+    /**
+     * 短信登录令牌
+     */
+    String CUSTOM_LOGIN_SMS = "CUSTOM_LOGIN_SMS";
+
 }
