@@ -25,11 +25,14 @@ public class ProductDetail extends BaseEntity {
     @NotNull(message = "ID不能为空")
     private Long id;
 
-    @NotNull(message = "用户名ID为空")
+    @NotNull(message = "用户名ID不能为空")
     private Long userId;
 
     @NotBlank(message = "名称不能为空")
     private String productName;
+
+    @NotNull(message = "名片ID不能为空")
+    private Long contactId;
     private String cover;
     private String proIntroduction;
     private Long status;
