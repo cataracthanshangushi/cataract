@@ -24,7 +24,6 @@ import com.taitan.system.pojo.vo.UserInfoVO;
 import com.taitan.system.pojo.vo.UserPageVO;
 import com.taitan.system.service.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,11 +53,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     private final SysRoleService roleService;
 
-    private final RedisTemplate redisTemplate;
-
-    private final ProContactService proContactService;
-
-    private final ProductDetailService productDetailService;
 
     /**
      * 获取用户分页列表
@@ -268,8 +262,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 //        Set<String> perms = (Set<String>) redisTemplate.opsForValue().get("USER_PERMS:" + user.getId());
 //        userInfoVO.setPerms(perms);
 
-        userInfoVO.setProContact(proContactService.getProContactByUserId(userId));
-        userInfoVO.setProductDetail(productDetailService.getProDetailByUserId(userId));
+//        userInfoVO.setProContact(proContactService.getProContactByUserId(userId));
+//        userInfoVO.setProductDetail(productDetailService.getProDetailByUserId(userId));
         return userInfoVO;
     }
 

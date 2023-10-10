@@ -38,11 +38,11 @@ public class UserInfoVO {
     @Schema(description="用户职称")
     private String profession;
 
-    @Schema(description="产品人信息")
-    private List<ProContact> proContact;
-
-    @Schema(description="产品信息")
-    private List<ProductDetail> productDetail;
+//    @Schema(description="产品人信息")
+//    private List<ProContact> proContact;
+//
+//    @Schema(description="产品信息")
+//    private List<ProductDetail> productDetail;
 
 //    @Schema(description="用户角色编码集合")
 //    private Set<String> roles;

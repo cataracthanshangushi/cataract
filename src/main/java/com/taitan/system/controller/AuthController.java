@@ -72,13 +72,15 @@ public class AuthController {
     @PostMapping("/register")
     public Result<LoginResult> register(
             @Parameter(description = "用户名", example = "admin") @RequestParam String username,
-            @Parameter(description = "密码", example = "123456") @RequestParam String password
+            @Parameter(description = "密码", example = "123456") @RequestParam String password,
+            @Parameter(description = "昵称") @RequestParam String nickname
     ) {
         UserForm userForm = new UserForm();
         userForm.setUsername(username);
         userForm.setPassword(password);
         userForm.setRoleIds(List.of(1L));
-        userForm.setNickname(username);
+        userForm.setNickname(nickname);
+        userForm.setAvatar("https://s2.loli.net/2022/04/07/gw1L2Z5sPtS8GIl.gif");
         boolean result = userService.saveUser(userForm);
         if(result){
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(

@@ -61,8 +61,6 @@ public class AliSmsServiceImpl implements AliSmsService {
         try {
             // 复制代码运行请自行打印 API 的返回值
             SendSmsResponse sendSmsResponse = client.sendSmsWithOptions(sendSmsRequest, runtime);
-            System.out.println("短信内容================" + sendSmsResponse.getBody().getMessage());
-            System.out.println("短信内容================" + sendSmsResponse.getBody().getCode());
         } catch (Exception error) {
             // 如有需要，请打印 error
             throw new RuntimeException(error);

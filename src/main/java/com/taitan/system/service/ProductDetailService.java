@@ -29,4 +29,6 @@ public interface ProductDetailService extends IService<ProductDetail> {
 
     List<ProductDetail> getProDetailByUserId(Long userid);
 
+    List<ProductDetail> getProDetail();
+
 }

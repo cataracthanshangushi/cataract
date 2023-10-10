@@ -14,6 +14,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @Tag(name = "产品接口")
 @RestController
@@ -37,7 +39,7 @@ public class ProductController {
     @GetMapping("/delectProConById")
     @Operation(summary = "删除产品人", security = {@SecurityRequirement(name = "Authorization")})
     public Result delectProConById(
-            @Parameter(description = "产品人ID") @PathVariable String ids
+            @Parameter(description = "产品人ID") String ids
     ) {
         boolean result = proContactService.deleteByIds(ids);
         return Result.judge(result);
@@ -46,9 +48,18 @@ public class ProductController {
     @GetMapping("/selectProConById")
     @Operation(summary = "选择产品人", security = {@SecurityRequirement(name = "Authorization")})
     public Result selectProConById(
-            @Parameter(description = "产品人ID") @PathVariable Long id
+            @Parameter(description = "产品人ID") Long id
     ) {
         ProContact result = proContactService.getProContact(id);
+        return Result.success(result);
+    }
+
+    @GetMapping("/selectProConByUserId")
+    @Operation(summary = "通过登录人获取产品人", security = {@SecurityRequirement(name = "Authorization")})
+    public Result selectProConByUserId(
+            @Parameter(description = "产品人ID") Long id
+    ) {
+        List<ProContact> result = proContactService.getProContactByUserId(id);
         return Result.success(result);
     }
 
@@ -73,7 +84,7 @@ public class ProductController {
     @GetMapping("/delectProDetailById")
     @Operation(summary = "删除产品", security = {@SecurityRequirement(name = "Authorization")})
     public Result delectProDetailById(
-            @Parameter(description = "产品ID") @PathVariable String ids
+            @Parameter(description = "产品ID") String ids
     ) {
         boolean result = productDetailService.deleteByIds(ids);
         return Result.judge(result);
@@ -82,9 +93,18 @@ public class ProductController {
     @GetMapping("/selectProDetailById")
     @Operation(summary = "选择产品", security = {@SecurityRequirement(name = "Authorization")})
     public Result selectProDetailById(
-            @Parameter(description = "产品ID") @PathVariable Long id
+            @Parameter(description = "产品ID") Long id
     ) {
         ProductDetail result = productDetailService.getProductDetail(id);
+        return Result.success(result);
+    }
+
+    @GetMapping("/selectProDetailByUserId")
+    @Operation(summary = "通过登录人获取产品", security = {@SecurityRequirement(name = "Authorization")})
+    public Result selectProDetailByUserId(
+            @Parameter(description = "产品ID") Long id
+    ) {
+        List<ProductDetail> result = productDetailService.getProDetailByUserId(id);
         return Result.success(result);
     }
 
@@ -97,4 +117,10 @@ public class ProductController {
         return Result.success(updateResult);
     }
 
+    @GetMapping("/proDetail")
+    @Operation(summary = "首页产品", security = {@SecurityRequirement(name = "Authorization")})
+    public Result proDetail() {
+        List<ProductDetail> result = productDetailService.getProDetail();
+        return Result.success(result);
+    }
 }

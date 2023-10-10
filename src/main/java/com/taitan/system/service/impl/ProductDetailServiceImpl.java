@@ -65,7 +65,15 @@ public class ProductDetailServiceImpl extends ServiceImpl<ProductDetailMapper, P
     public List<ProductDetail> getProDetailByUserId(Long userid) {
         QueryWrapper<ProductDetail> wrapper=new QueryWrapper<>();
         wrapper.eq("user_id",userid);
-        List<ProductDetail> userList = productDetailMapper.selectList(wrapper);
-        return userList;
+        List<ProductDetail> productList = productDetailMapper.selectList(wrapper);
+        return productList;
+    }
+
+    @Override
+    public List<ProductDetail> getProDetail() {
+        QueryWrapper<ProductDetail> wrapper=new QueryWrapper<>();
+        wrapper.eq("display",1);
+        List<ProductDetail> productList = productDetailMapper.selectList(wrapper);
+        return productList;
     }
 }
