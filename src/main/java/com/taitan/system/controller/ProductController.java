@@ -14,8 +14,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 
 @Tag(name = "产品接口")
 @RestController
@@ -45,24 +43,6 @@ public class ProductController {
         return Result.judge(result);
     }
 
-    @GetMapping("/selectProConById")
-    @Operation(summary = "选择产品人", security = {@SecurityRequirement(name = "Authorization")})
-    public Result selectProConById(
-            @Parameter(description = "产品人ID") Long id
-    ) {
-        ProContact result = proContactService.getProContact(id);
-        return Result.success(result);
-    }
-
-    @GetMapping("/selectProConByUserId")
-    @Operation(summary = "通过登录人获取产品人", security = {@SecurityRequirement(name = "Authorization")})
-    public Result selectProConByUserId(
-            @Parameter(description = "产品人ID") Long id
-    ) {
-        List<ProContact> result = proContactService.getProContactByUserId(id);
-        return Result.success(result);
-    }
-
     @PostMapping("/saveProContact")
     @Operation(summary = "新增产品人", security = {@SecurityRequirement(name = "Authorization")})
     public Result saveProContact(
@@ -88,24 +68,6 @@ public class ProductController {
     ) {
         boolean result = productDetailService.deleteByIds(ids);
         return Result.judge(result);
-    }
-
-    @GetMapping("/selectProDetailById")
-    @Operation(summary = "选择产品", security = {@SecurityRequirement(name = "Authorization")})
-    public Result selectProDetailById(
-            @Parameter(description = "产品ID") Long id
-    ) {
-        ProductDetail result = productDetailService.getProductDetail(id);
-        return Result.success(result);
-    }
-
-    @GetMapping("/selectProDetailByUserId")
-    @Operation(summary = "通过登录人获取产品", security = {@SecurityRequirement(name = "Authorization")})
-    public Result selectProDetailByUserId(
-            @Parameter(description = "产品ID") Long id
-    ) {
-        List<ProductDetail> result = productDetailService.getProDetailByUserId(id);
-        return Result.success(result);
     }
 
     @PostMapping("/saveProDetail")

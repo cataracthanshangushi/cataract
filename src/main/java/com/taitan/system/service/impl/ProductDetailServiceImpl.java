@@ -7,7 +7,9 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taitan.system.mapper.ProductDetailMapper;
+import com.taitan.system.pojo.bo.UserAuthInfo;
 import com.taitan.system.pojo.entity.ProductDetail;
+import com.taitan.system.pojo.vo.ProductDetailVO;
 import com.taitan.system.service.ProductDetailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -70,10 +72,11 @@ public class ProductDetailServiceImpl extends ServiceImpl<ProductDetailMapper, P
     }
 
     @Override
-    public List<ProductDetail> getProDetail() {
-        QueryWrapper<ProductDetail> wrapper=new QueryWrapper<>();
-        wrapper.eq("display",1);
-        List<ProductDetail> productList = productDetailMapper.selectList(wrapper);
+    public List<ProductDetailVO> getProDetail() {
+        List<ProductDetailVO> productList = productDetailMapper.getProDetail(1);
+//        QueryWrapper<ProductDetail> wrapper=new QueryWrapper<>();
+//        wrapper.eq("display",1);
+//        List<ProductDetail> productList = productDetailMapper.selectList(wrapper);
         return productList;
     }
 }

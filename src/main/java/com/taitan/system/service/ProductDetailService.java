@@ -1,9 +1,8 @@
 package com.taitan.system.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taitan.system.pojo.entity.ProContact;
 import com.taitan.system.pojo.entity.ProductDetail;
-import com.taitan.system.pojo.form.DeptForm;
+import com.taitan.system.pojo.vo.ProductDetailVO;
 
 import java.util.List;
 
@@ -27,8 +26,10 @@ public interface ProductDetailService extends IService<ProductDetail> {
 
     ProductDetail getProductDetail(Long id);
 
+
     List<ProductDetail> getProDetailByUserId(Long userid);
 
-    List<ProductDetail> getProDetail();
+
+    List<ProductDetailVO> getProDetail();
 
 }
