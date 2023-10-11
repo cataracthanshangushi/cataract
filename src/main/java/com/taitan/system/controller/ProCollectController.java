@@ -2,8 +2,6 @@ package com.taitan.system.controller;
 
 import com.taitan.system.common.result.Result;
 import com.taitan.system.pojo.entity.ProCollect;
-import com.taitan.system.pojo.entity.ProContact;
-import com.taitan.system.pojo.vo.FileInfoVO;
 import com.taitan.system.service.ProCollectService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -12,7 +10,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -51,4 +48,11 @@ public class ProCollectController {
         return Result.success(result);
     }
 
+    @PostMapping("/checkCollect")
+    @Operation(summary = "查询是否收藏", security = {@SecurityRequirement(name = "Authorization")})
+    public boolean checkCollect(
+            @RequestBody @Valid ProCollect proCollect
+    ) {
+        return proCollectService.checkProCollect(proCollect);
+    }
 }

@@ -24,5 +24,7 @@ public interface ProCollectService extends IService<ProCollect> {
 
     List<ProCollect> getProCollectByUserId(Long id);
 
+    boolean checkProCollect(ProCollect proCollect);
+
 
 }

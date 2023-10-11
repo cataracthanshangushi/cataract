@@ -29,16 +29,25 @@ public class ProCollectServiceImpl extends ServiceImpl<ProCollectMapper, ProColl
     @Override
     public boolean deleteProCollect(ProCollect proCollect) {
         Assert.isTrue(ObjectUtil.isNotEmpty(proCollect), "取消收藏失败，数据为空");
-        QueryWrapper<ProCollect> wrapper=new QueryWrapper<>();
-        wrapper.eq("user_id",proCollect.getUserId());
-        wrapper.eq("pro_id",proCollect.getProId());
+        QueryWrapper<ProCollect> wrapper = new QueryWrapper<>();
+        wrapper.eq("user_id", proCollect.getUserId());
+        wrapper.eq("pro_id", proCollect.getProId());
         return this.remove(wrapper);
     }
 
     @Override
     public List<ProCollect> getProCollectByUserId(Long id) {
-        QueryWrapper<ProCollect> wrapper=new QueryWrapper<>();
-        wrapper.eq("user_id",id);
+        QueryWrapper<ProCollect> wrapper = new QueryWrapper<>();
+        wrapper.eq("user_id", id);
         return this.list(wrapper);
+    }
+
+    @Override
+    public boolean checkProCollect(ProCollect proCollect) {
+        QueryWrapper<ProCollect> wrapper = new QueryWrapper<>();
+        wrapper.eq("user_id", proCollect.getUserId());
+        wrapper.eq("pro_id", proCollect.getProId());
+        ProCollect result = this.getOne(wrapper);
+        return ObjectUtil.isNotEmpty(result) ? true : false;
     }
 }
