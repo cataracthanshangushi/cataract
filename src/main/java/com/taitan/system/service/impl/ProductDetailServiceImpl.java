@@ -79,4 +79,10 @@ public class ProductDetailServiceImpl extends ServiceImpl<ProductDetailMapper, P
 //        List<ProductDetail> productList = productDetailMapper.selectList(wrapper);
         return productList;
     }
+
+    @Override
+    public List<ProductDetailVO> getProDetailByName(String name) {
+        List<ProductDetailVO> productList = productDetailMapper.getProDetailByName(name);
+        return productList;
+    }
 }

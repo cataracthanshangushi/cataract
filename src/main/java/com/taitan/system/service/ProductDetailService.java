@@ -32,4 +32,6 @@ public interface ProductDetailService extends IService<ProductDetail> {
 
     List<ProductDetailVO> getProDetail();
 
+    List<ProductDetailVO> getProDetailByName(String name);
+
 }

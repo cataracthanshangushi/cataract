@@ -22,4 +22,7 @@ public interface ProductDetailMapper extends BaseMapper<ProductDetail> {
     @Select("select id,product_name,user_id,contact_id,cover from product_detail where display = #{display}")
     List<ProductDetailVO> getProDetail(Integer display);
 
+    @Select("select id,product_name,user_id,contact_id,cover from product_detail where product_name like CONCAT('%',#{name},'%')")
+    List<ProductDetailVO> getProDetailByName(String name);
+
 }
