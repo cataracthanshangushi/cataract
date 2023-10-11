@@ -117,10 +117,4 @@ public class ProductController {
         return Result.success(updateResult);
     }
 
-    @GetMapping("/proDetail")
-    @Operation(summary = "首页产品", security = {@SecurityRequirement(name = "Authorization")})
-    public Result proDetail() {
-        List<ProductDetail> result = productDetailService.getProDetail();
-        return Result.success(result);
-    }
 }

@@ -78,8 +78,9 @@ public class AuthController {
         UserForm userForm = new UserForm();
         userForm.setUsername(username);
         userForm.setPassword(password);
-        userForm.setRoleIds(List.of(1L));
+        userForm.setRoleIds(List.of(3L));
         userForm.setNickname(nickname);
+        userForm.setDeptId(0L);
         userForm.setAvatar("https://s2.loli.net/2022/04/07/gw1L2Z5sPtS8GIl.gif");
         boolean result = userService.saveUser(userForm);
         if(result){

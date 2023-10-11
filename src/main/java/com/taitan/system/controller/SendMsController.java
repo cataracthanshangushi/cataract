@@ -4,7 +4,9 @@ import com.taitan.system.common.constant.SecurityConstants;
 import com.taitan.system.common.result.Result;
 import com.taitan.system.framework.security.JwtTokenManager;
 import com.taitan.system.pojo.dto.LoginResult;
+import com.taitan.system.pojo.entity.ProductDetail;
 import com.taitan.system.service.AliSmsService;
+import com.taitan.system.service.ProductDetailService;
 import com.taitan.system.service.SysUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -15,6 +17,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @Tag(name = "短信操作接口")
@@ -31,6 +35,7 @@ public class SendMsController {
 
     private final JwtTokenManager jwtTokenManager;
 
+    private final ProductDetailService productDetailService;
 
     @Operation(summary = "短信登录")
     @PostMapping("/login")
@@ -83,5 +88,12 @@ public class SendMsController {
             @Parameter(description = "手机号") @RequestParam String phone
     ) {
         return Result.judge(userService.checkUserName(phone));
+    }
+
+    @GetMapping("/proDetail")
+    @Operation(summary = "首页产品")
+    public Result proDetail() {
+        List<ProductDetail> result = productDetailService.getProDetail();
+        return Result.success(result);
     }
 }
