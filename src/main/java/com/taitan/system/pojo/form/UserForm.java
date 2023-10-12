@@ -23,6 +23,7 @@ public class UserForm {
 
     @Schema(description="用户名")
     @NotBlank(message = "用户名不能为空")
+    @Pattern(regexp = "^1(3\\d|4[5-9]|5[0-35-9]|6[2567]|7[0-8]|8\\d|9[0-35-9])\\d{8}$", message = "手机号格式不对")
     private String username;
 
     @Schema(description="密码")
@@ -32,7 +33,7 @@ public class UserForm {
     @NotBlank(message = "昵称不能为空")
     private String nickname;
 
-    @Pattern(regexp = "^1(3\\d|4[5-9]|5[0-35-9]|6[2567]|7[0-8]|8\\d|9[0-35-9])\\d{8}$", message = "{phone.valid}")
+    @Pattern(regexp = "^1(3\\d|4[5-9]|5[0-35-9]|6[2567]|7[0-8]|8\\d|9[0-35-9])\\d{8}$", message = "手机号格式不对")
     private String mobile;
 
     @Schema(description="性别")
@@ -51,7 +52,7 @@ public class UserForm {
     private Long deptId;
 
     @Schema(description="角色ID集合")
-    @NotEmpty(message = "用户角色不能为空")
+//    @NotEmpty(message = "用户角色不能为空")
     private List<Long> roleIds;
 
 }

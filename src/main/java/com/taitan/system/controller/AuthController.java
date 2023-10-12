@@ -19,6 +19,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -71,22 +72,17 @@ public class AuthController {
     @Operation(summary = "注册")
     @PostMapping("/register")
     public Result<LoginResult> register(
-            @Parameter(description = "用户名", example = "admin") @RequestParam String username,
-            @Parameter(description = "密码", example = "123456") @RequestParam String password,
-            @Parameter(description = "昵称") @RequestParam String nickname
+            @RequestBody @Valid UserForm userForm
     ) {
-        UserForm userForm = new UserForm();
-        userForm.setUsername(username);
-        userForm.setPassword(password);
         userForm.setRoleIds(List.of(3L));
-        userForm.setNickname(nickname);
         userForm.setDeptId(0L);
         userForm.setAvatar("https://s2.loli.net/2022/04/07/gw1L2Z5sPtS8GIl.gif");
+        userForm.setMobile(userForm.getUsername());
         boolean result = userService.saveUser(userForm);
         if(result){
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                    username.toLowerCase().trim(),
-                    password
+                    userForm.getUsername().toLowerCase().trim(),
+                    userForm.getPassword()
             );
             Authentication authentication = authenticationManager.authenticate(authenticationToken);
             // 生成token
@@ -145,10 +141,7 @@ public class AuthController {
         );
         Authentication authentication = authenticationManager.authenticate(authenticationToken);
         if(authentication.isAuthenticated()){
-            result = userService.update(new LambdaUpdateWrapper<SysUser>()
-                    .eq(SysUser::getUsername, username)
-                    .set(SysUser::getPassword, passwordEncoder.encode(newPassword))
-            );
+            result = userService.updatePasswordByName(username,newPassword);
         }
         return Result.judge(result);
 
