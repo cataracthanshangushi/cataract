@@ -5,7 +5,6 @@ import com.taitan.system.common.result.Result;
 import com.taitan.system.framework.security.JwtTokenManager;
 import com.taitan.system.pojo.dto.LoginResult;
 import com.taitan.system.service.AliSmsService;
-import com.taitan.system.service.ProductDetailService;
 import com.taitan.system.service.SysUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -15,7 +14,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-
 
 
 @Tag(name = "短信操作接口")
@@ -32,7 +30,6 @@ public class SendMsController {
 
     private final JwtTokenManager jwtTokenManager;
 
-    private final ProductDetailService productDetailService;
 
     @Operation(summary = "短信登录")
     @PostMapping("/login")
@@ -40,8 +37,8 @@ public class SendMsController {
             @Parameter(description = "用户名") @RequestParam String phone,
             @Parameter(description = "验证码") @RequestParam String code
     ) {
-        if(userService.checkUserName(phone)){
-            if(aliSmsService.checkCode(phone,code)){
+        if (userService.checkUserName(phone)) {
+            if (aliSmsService.checkCode(phone, code)) {
                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                         phone.toLowerCase().trim(),
                         SecurityConstants.CUSTOM_LOGIN_SMS
@@ -54,10 +51,10 @@ public class SendMsController {
                         .accessToken(accessToken)
                         .build();
                 return Result.success(loginResult);
-            }else{
+            } else {
                 return Result.failed("验证码错误");
             }
-        }else{
+        } else {
             return Result.failed("用户不存在");
         }
     }
@@ -76,7 +73,7 @@ public class SendMsController {
             @Parameter(description = "手机号") @RequestParam String phone,
             @Parameter(description = "验证码") @RequestParam String code
     ) {
-        return Result.judge(aliSmsService.checkCode(phone,code));
+        return Result.judge(aliSmsService.checkCode(phone, code));
     }
 
     @GetMapping("/checkphone")
@@ -85,6 +82,22 @@ public class SendMsController {
             @Parameter(description = "手机号") @RequestParam String phone
     ) {
         return Result.judge(userService.checkUserName(phone));
+    }
+
+    @GetMapping("/updatePassword")
+    @Operation(summary = "手机验证码登录修改密码")
+    public Result updatePassword(
+            @Parameter(description = "用户名") @RequestParam String phone,
+            @Parameter(description = "验证码") @RequestParam String code,
+            @Parameter(description = "新密码") @RequestParam String password
+    ) {
+        Boolean result = false;
+        if (userService.checkUserName(phone)) {
+            if (aliSmsService.checkCode(phone, code)) {
+                result = userService.updatePasswordByName(phone, password);
+            }
+        }
+        return Result.judge(result);
     }
 
 }

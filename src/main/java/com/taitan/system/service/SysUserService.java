@@ -106,4 +106,6 @@ public interface SysUserService extends IService<SysUser> {
      * @return
      */
     boolean checkUserName(String username);
+
+    boolean updatePasswordByName(String username, String password);
 }

@@ -193,6 +193,17 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         return result;
     }
 
+    @Override
+    public boolean updatePasswordByName(String username, String password) {
+        String encryptedPassword = passwordEncoder.encode(password);
+        boolean result = this.update(new LambdaUpdateWrapper<SysUser>()
+                .eq(SysUser::getUsername, username)
+                .set(SysUser::getPassword, encryptedPassword)
+        );
+
+        return result;
+    }
+
     /**
      * 根据用户名获取认证信息
      *
