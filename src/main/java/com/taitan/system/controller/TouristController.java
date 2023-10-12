@@ -1,6 +1,8 @@
 package com.taitan.system.controller;
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.taitan.system.common.result.Result;
 import com.taitan.system.pojo.entity.ProContact;
 import com.taitan.system.pojo.entity.ProductDetail;
@@ -73,9 +75,11 @@ public class TouristController {
     @GetMapping("/getProDetailByName")
     @Operation(summary = "模糊查询产品")
     public Result getProDetailByName(
-            @Parameter(description = "产品名字") String productName
+            @Parameter(description = "产品名字") String productName,
+            @Parameter(description = "当前页码") Integer pageNum,
+            @Parameter(description = "每页条数") Integer pageSize
     ) {
-        List<ProductDetailVO> result = productDetailService.getProDetailByName(productName);
+        IPage<ProductDetailVO> result = productDetailService.getProDetailByName(pageNum,pageSize,productName);
         return Result.success(result);
     }
 }

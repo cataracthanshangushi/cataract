@@ -1,5 +1,7 @@
 package com.taitan.system.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taitan.system.pojo.entity.ProductDetail;
 import com.taitan.system.pojo.vo.ProductDetailVO;
@@ -8,7 +10,7 @@ import java.util.List;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author PB080086
@@ -32,6 +34,6 @@ public interface ProductDetailService extends IService<ProductDetail> {
 
     List<ProductDetailVO> getProDetail();
 
-    List<ProductDetailVO> getProDetailByName(String name);
+    IPage<ProductDetailVO> getProDetailByName(Integer pageNum, Integer pageSize, String name);
 
 }

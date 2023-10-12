@@ -1,6 +1,8 @@
 package com.taitan.system.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.taitan.system.pojo.entity.ProductDetail;
 import com.taitan.system.pojo.vo.ProductDetailVO;
 import org.apache.ibatis.annotations.Mapper;
@@ -10,7 +12,7 @@ import java.util.List;
 
 /**
  * <p>
- *  Mapper 接口
+ * Mapper 接口
  * </p>
  *
  * @author PB080086
@@ -23,6 +25,6 @@ public interface ProductDetailMapper extends BaseMapper<ProductDetail> {
     List<ProductDetailVO> getProDetail(Integer display);
 
     @Select("select id,product_name,user_id,contact_id,cover from product_detail where product_name like CONCAT('%',#{name},'%')")
-    List<ProductDetailVO> getProDetailByName(String name);
+    IPage<ProductDetailVO> getProDetailByName(IPage<ProductDetailVO> page, String name);
 
 }

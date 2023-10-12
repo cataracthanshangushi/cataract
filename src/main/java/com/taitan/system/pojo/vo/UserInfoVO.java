@@ -38,6 +38,9 @@ public class UserInfoVO {
     @Schema(description="用户职称")
     private String profession;
 
+    @Schema(description="用户级别")
+    private Long deptId;
+
 //    @Schema(description="产品人信息")
 //    private List<ProContact> proContact;
 //

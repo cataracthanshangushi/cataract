@@ -5,6 +5,8 @@ import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taitan.system.mapper.ProductDetailMapper;
 import com.taitan.system.pojo.bo.UserAuthInfo;
@@ -20,7 +22,7 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author PB080086
@@ -65,8 +67,8 @@ public class ProductDetailServiceImpl extends ServiceImpl<ProductDetailMapper, P
 
     @Override
     public List<ProductDetail> getProDetailByUserId(Long userid) {
-        QueryWrapper<ProductDetail> wrapper=new QueryWrapper<>();
-        wrapper.eq("user_id",userid);
+        QueryWrapper<ProductDetail> wrapper = new QueryWrapper<>();
+        wrapper.eq("user_id", userid);
         List<ProductDetail> productList = productDetailMapper.selectList(wrapper);
         return productList;
     }
@@ -81,8 +83,9 @@ public class ProductDetailServiceImpl extends ServiceImpl<ProductDetailMapper, P
     }
 
     @Override
-    public List<ProductDetailVO> getProDetailByName(String name) {
-        List<ProductDetailVO> productList = productDetailMapper.getProDetailByName(name);
+    public IPage<ProductDetailVO> getProDetailByName(Integer pageNum, Integer pageSize, String name) {
+        IPage<ProductDetailVO> page = new Page(pageNum, pageSize);
+        IPage<ProductDetailVO> productList = productDetailMapper.getProDetailByName(page, name);
         return productList;
     }
 }

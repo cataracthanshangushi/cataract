@@ -246,14 +246,15 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
                         SysUser::getAvatar,
                         SysUser::getBirthday,
                         SysUser::getOccupation,
-                        SysUser::getProfession
+                        SysUser::getProfession,
+                        SysUser::getDeptId
                 )
         );
         // entity->VO
         UserInfoVO userInfoVO = userConverter.entity2UserInfoVo(user);
         userInfoVO.setUsername(username);
 
-        Long userId = user.getId();
+//        Long userId = user.getId();
         // 用户角色集合
 //        Set<String> roles = SecurityUtils.getRoles();
 //        userInfoVO.setRoles(roles);
