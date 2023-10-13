@@ -2,6 +2,7 @@ package com.taitan.system.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taitan.system.pojo.entity.ProCollect;
+import com.taitan.system.pojo.vo.ProductDetailVO;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public interface ProCollectService extends IService<ProCollect> {
     boolean deleteProCollect(ProCollect proCollect);
 
 
-    List<ProCollect> getProCollectByUserId(Long id);
+    List<ProductDetailVO> getProCollectByUserId(Long id);
 
     boolean checkProCollect(ProCollect proCollect);
 

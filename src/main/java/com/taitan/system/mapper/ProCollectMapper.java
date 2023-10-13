@@ -1,8 +1,13 @@
 package com.taitan.system.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taitan.system.pojo.entity.ProCollect;
+import com.taitan.system.pojo.vo.ProductDetailVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,5 +19,9 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface ProCollectMapper extends BaseMapper<ProCollect> {
+
+    @Select("select b.id,b.user_id,b.product_name,b.contact_id,b.cover,b.category " +
+            "from pro_collect a LEFT JOIN product_detail b ON a.pro_id=b.id WHERE a.user_id=#{userId}")
+    List<ProductDetailVO> getProDetailByCol(Long userId);
 
 }

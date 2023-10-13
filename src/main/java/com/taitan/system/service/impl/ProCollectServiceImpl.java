@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taitan.system.mapper.ProCollectMapper;
 import com.taitan.system.pojo.entity.ProCollect;
+import com.taitan.system.pojo.vo.ProductDetailVO;
 import com.taitan.system.service.ProCollectService;
 
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProCollectServiceImpl extends ServiceImpl<ProCollectMapper, ProCollect> implements ProCollectService {
 
+    private final ProCollectMapper proCollectMapper;
 
     @Override
     public boolean saveProCollect(ProCollect proCollect) {
@@ -37,10 +39,11 @@ public class ProCollectServiceImpl extends ServiceImpl<ProCollectMapper, ProColl
     }
 
     @Override
-    public List<ProCollect> getProCollectByUserId(Long id) {
-        QueryWrapper<ProCollect> wrapper = new QueryWrapper<>();
-        wrapper.eq("user_id", id);
-        return this.list(wrapper);
+    public List<ProductDetailVO> getProCollectByUserId(Long id) {
+        return this.proCollectMapper.getProDetailByCol(id);
+//        QueryWrapper<ProCollect> wrapper = new QueryWrapper<>();
+//        wrapper.eq("user_id", id);
+//        return this.list(wrapper);
     }
 
     @Override

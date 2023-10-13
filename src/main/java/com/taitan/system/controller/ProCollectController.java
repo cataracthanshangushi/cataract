@@ -2,6 +2,7 @@ package com.taitan.system.controller;
 
 import com.taitan.system.common.result.Result;
 import com.taitan.system.pojo.entity.ProCollect;
+import com.taitan.system.pojo.vo.ProductDetailVO;
 import com.taitan.system.service.ProCollectService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -44,7 +45,7 @@ public class ProCollectController {
     public Result selectProCollectByuserId(
             @Parameter(description = "用户ID") Long id
     ) {
-        List<ProCollect> result = proCollectService.getProCollectByUserId(id);
+        List<ProductDetailVO> result = proCollectService.getProCollectByUserId(id);
         return Result.success(result);
     }
 
