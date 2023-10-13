@@ -7,6 +7,7 @@ import com.taitan.system.pojo.entity.ProductDetail;
 import com.taitan.system.pojo.vo.ProductDetailVO;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -32,7 +33,7 @@ public interface ProductDetailService extends IService<ProductDetail> {
     List<ProductDetail> getProDetailByUserId(Long userid);
 
 
-    List<ProductDetailVO> getProDetail();
+    Map<Integer, List<ProductDetailVO>> getProDetail();
 
     IPage<ProductDetailVO> getProDetailByName(Integer pageNum, Integer pageSize, String name);
 

@@ -18,6 +18,7 @@ import com.taitan.system.pojo.bo.UserBO;
 import com.taitan.system.pojo.bo.UserFormBO;
 import com.taitan.system.pojo.entity.SysUser;
 import com.taitan.system.pojo.form.UserForm;
+import com.taitan.system.pojo.form.UserUpdateForm;
 import com.taitan.system.pojo.query.UserPageQuery;
 import com.taitan.system.pojo.vo.UserExportVO;
 import com.taitan.system.pojo.vo.UserInfoVO;
@@ -135,26 +136,26 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
      */
     @Override
     @Transactional
-    public boolean updateUser(Long userId, UserForm userForm) {
+    public boolean updateUser(Long userId, UserUpdateForm userForm) {
 
         String username = userForm.getUsername();
 
         long count = this.count(new LambdaQueryWrapper<SysUser>()
                 .eq(SysUser::getUsername, username)
-                .ne(SysUser::getId, userId)
+                .eq(SysUser::getId, userId)
         );
-        Assert.isTrue(count == 0, "用户名已存在");
+        Assert.isTrue(count != 0, "用户名不存在");
 
         // form -> entity
-        SysUser entity = userConverter.form2Entity(userForm);
+        SysUser entity = userConverter.form2UpEntity(userForm);
 
         // 修改用户
         boolean result = this.updateById(entity);
 
-        if (result) {
-            // 保存用户角色
-            userRoleService.saveUserRoles(entity.getId(), userForm.getRoleIds());
-        }
+//        if (result) {
+//            // 保存用户角色
+//            userRoleService.saveUserRoles(entity.getId(), userForm.getRoleIds());
+//        }
         return result;
     }
 
@@ -258,7 +259,10 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
                         SysUser::getBirthday,
                         SysUser::getOccupation,
                         SysUser::getProfession,
-                        SysUser::getDeptId
+                        SysUser::getDeptId,
+                        SysUser::getEmail,
+                        SysUser::getGender,
+                        SysUser::getMobile
                 )
         );
         // entity->VO

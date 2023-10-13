@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.taitan.system.pojo.entity.SysUser;
 import com.taitan.system.pojo.form.UserForm;
 import com.taitan.system.pojo.bo.UserAuthInfo;
+import com.taitan.system.pojo.form.UserUpdateForm;
 import com.taitan.system.pojo.query.UserPageQuery;
 import com.taitan.system.pojo.vo.UserExportVO;
 import com.taitan.system.pojo.vo.UserInfoVO;
@@ -53,7 +54,7 @@ public interface SysUserService extends IService<SysUser> {
      * @param userForm 用户表单对象
      * @return
      */
-    boolean updateUser(Long userId, UserForm userForm);
+    boolean updateUser(Long userId, UserUpdateForm userForm);
 
 
     /**

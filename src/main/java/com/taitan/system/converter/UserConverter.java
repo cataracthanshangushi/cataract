@@ -5,6 +5,7 @@ import com.taitan.system.pojo.bo.UserBO;
 import com.taitan.system.pojo.entity.SysUser;
 import com.taitan.system.pojo.form.UserForm;
 import com.taitan.system.pojo.bo.UserFormBO;
+import com.taitan.system.pojo.form.UserUpdateForm;
 import com.taitan.system.pojo.vo.UserImportVO;
 import com.taitan.system.pojo.vo.UserInfoVO;
 import com.taitan.system.pojo.vo.UserPageVO;
@@ -35,6 +36,8 @@ public interface UserConverter {
 
     @InheritInverseConfiguration(name = "entity2Form")
     SysUser form2Entity(UserForm entity);
+
+    SysUser form2UpEntity(UserUpdateForm entity);
 
     @Mappings({
             @Mapping(target = "userId", source = "id")

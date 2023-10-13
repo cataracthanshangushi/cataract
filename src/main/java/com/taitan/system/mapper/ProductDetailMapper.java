@@ -21,8 +21,11 @@ import java.util.List;
 @Mapper
 public interface ProductDetailMapper extends BaseMapper<ProductDetail> {
 
-    @Select("select id,product_name,user_id,contact_id,cover from product_detail where display = #{display}")
-    List<ProductDetailVO> getProDetail(Integer display);
+    @Select("select * from (\n" +
+            "select *,row_number() over(PARTITION by category order by id) as rowid \n" +
+            "from product_detail where display=1 \n" +
+            ") a where rowid<=10 ")
+    List<ProductDetailVO> getProDetail();
 
     @Select("select id,product_name,user_id,contact_id,cover from product_detail where product_name like CONCAT('%',#{name},'%')")
     IPage<ProductDetailVO> getProDetailByName(IPage<ProductDetailVO> page, String name);

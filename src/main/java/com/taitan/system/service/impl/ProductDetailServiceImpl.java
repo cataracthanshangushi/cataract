@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -74,12 +75,10 @@ public class ProductDetailServiceImpl extends ServiceImpl<ProductDetailMapper, P
     }
 
     @Override
-    public List<ProductDetailVO> getProDetail() {
-        List<ProductDetailVO> productList = productDetailMapper.getProDetail(1);
-//        QueryWrapper<ProductDetail> wrapper=new QueryWrapper<>();
-//        wrapper.eq("display",1);
-//        List<ProductDetail> productList = productDetailMapper.selectList(wrapper);
-        return productList;
+    public Map<Integer, List<ProductDetailVO>> getProDetail() {
+        List<ProductDetailVO> productList = productDetailMapper.getProDetail();
+        Map<Integer, List<ProductDetailVO>> collect = productList.stream().collect(Collectors.groupingBy(ProductDetailVO::getCategory));
+        return collect;
     }
 
     @Override

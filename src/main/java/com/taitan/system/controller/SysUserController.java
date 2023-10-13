@@ -9,6 +9,7 @@ import com.taitan.system.common.result.PageResult;
 import com.taitan.system.common.result.Result;
 import com.taitan.system.common.util.ExcelUtils;
 import com.taitan.system.listener.UserImportListener;
+import com.taitan.system.pojo.form.UserUpdateForm;
 import com.taitan.system.pojo.vo.UserImportVO;
 import com.taitan.system.pojo.form.UserForm;
 import com.taitan.system.pojo.entity.SysUser;
@@ -85,7 +86,7 @@ public class SysUserController {
 //    @PreAuthorize("@pms.hasPermission('sys:user:edit')")
     public Result updateUser(
             @Parameter(description = "用户ID") @PathVariable Long userId,
-            @RequestBody @Validated UserForm userForm) {
+            @RequestBody @Validated UserUpdateForm userForm) {
         boolean result = userService.updateUser(userId, userForm);
         return Result.judge(result);
     }

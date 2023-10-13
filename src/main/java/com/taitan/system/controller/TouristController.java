@@ -17,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 
 @Tag(name = "游客能访问的产品接口")
@@ -68,7 +69,7 @@ public class TouristController {
     @GetMapping("/proDetail")
     @Operation(summary = "首页产品")
     public Result proDetail() {
-        List<ProductDetailVO> result = productDetailService.getProDetail();
+        Map<Integer, List<ProductDetailVO>> result = productDetailService.getProDetail();
         return Result.success(result);
     }
 

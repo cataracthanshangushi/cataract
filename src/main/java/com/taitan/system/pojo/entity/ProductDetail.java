@@ -34,6 +34,8 @@ public class ProductDetail extends BaseEntity {
     @NotNull(message = "名片ID不能为空")
     private Long contactId;
 
+    @NotNull(message = "类别不能为空")
+    private Long category;
     private Integer display;
     private String cover;
     private String proIntroduction;

@@ -3,6 +3,7 @@ package com.taitan.system.pojo.vo;
 import com.taitan.system.pojo.entity.ProContact;
 import com.taitan.system.pojo.entity.ProductDetail;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 import java.util.List;
@@ -32,6 +33,12 @@ public class UserInfoVO {
     @Schema(description="用户生日")
     private String birthday;
 
+    @Schema(description="性别")
+    private Integer gender;
+
+    @Schema(description="邮箱")
+    private String email;
+
     @Schema(description="用户职业")
     private String occupation;
 
@@ -40,6 +47,9 @@ public class UserInfoVO {
 
     @Schema(description="用户级别")
     private Long deptId;
+
+    @Schema(description="手机号")
+    private String mobile;
 
 //    @Schema(description="产品人信息")
 //    private List<ProContact> proContact;
