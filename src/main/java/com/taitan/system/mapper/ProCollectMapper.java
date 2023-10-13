@@ -1,7 +1,6 @@
 package com.taitan.system.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taitan.system.pojo.entity.ProCollect;
 import com.taitan.system.pojo.vo.ProductDetailVO;
 import org.apache.ibatis.annotations.Mapper;
