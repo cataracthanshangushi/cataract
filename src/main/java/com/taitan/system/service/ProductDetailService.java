@@ -35,6 +35,8 @@ public interface ProductDetailService extends IService<ProductDetail> {
 
     Map<Integer, List<ProductDetailVO>> getProDetail();
 
+    List<ProductDetailVO> getNewProDetail();
+
     IPage<ProductDetailVO> getProDetailByName(Integer pageNum, Integer pageSize, String name);
 
 }

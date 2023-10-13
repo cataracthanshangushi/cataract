@@ -82,6 +82,11 @@ public class ProductDetailServiceImpl extends ServiceImpl<ProductDetailMapper, P
     }
 
     @Override
+    public List<ProductDetailVO> getNewProDetail() {
+        return productDetailMapper.getNewProDetail();
+    }
+
+    @Override
     public IPage<ProductDetailVO> getProDetailByName(Integer pageNum, Integer pageSize, String name) {
         IPage<ProductDetailVO> page = new Page(pageNum, pageSize);
         IPage<ProductDetailVO> productList = productDetailMapper.getProDetailByName(page, name);
