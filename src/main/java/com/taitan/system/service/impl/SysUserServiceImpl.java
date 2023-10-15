@@ -148,7 +148,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
         // form -> entity
         SysUser entity = userConverter.form2UpEntity(userForm);
-
+        entity.setId(userId);
         // 修改用户
         boolean result = this.updateById(entity);
 
