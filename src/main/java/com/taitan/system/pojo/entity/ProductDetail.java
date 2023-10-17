@@ -22,7 +22,7 @@ import lombok.Data;
 public class ProductDetail extends BaseEntity {
 
     @TableId(value = "id", type = IdType.AUTO)
-    @NotNull(message = "ID不能为空")
+//    @NotNull(message = "ID不能为空")
     private Long id;
 
     @NotNull(message = "用户名ID不能为空")

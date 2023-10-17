@@ -23,7 +23,6 @@ public class ProContact extends BaseEntity {
 
 
     @TableId(value = "id", type = IdType.AUTO)
-    @NotNull(message = "ID不能为空")
     private Long id;
 
     @NotNull(message = "用户ID不能为空")

@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taitan.system.mapper.ProContactMapper;
 import com.taitan.system.pojo.entity.ProContact;
+import com.taitan.system.pojo.entity.ProductDetail;
 import com.taitan.system.service.ProContactService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,10 @@ public class ProContactServiceImpl extends ServiceImpl<ProContactMapper, ProCont
 
     @Override
     public Long updateProContact(ProContact proContact) {
+        long count = this.count(new LambdaQueryWrapper<ProContact>()
+                .eq(ProContact::getId, proContact.getId())
+        );
+        Assert.isTrue(count != 0, "名片ID不存在");
         this.updateById(proContact);
         return proContact.getId();
     }

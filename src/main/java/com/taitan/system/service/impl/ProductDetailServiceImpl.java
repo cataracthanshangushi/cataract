@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taitan.system.mapper.ProductDetailMapper;
 import com.taitan.system.pojo.bo.UserAuthInfo;
 import com.taitan.system.pojo.entity.ProductDetail;
+import com.taitan.system.pojo.entity.SysUser;
 import com.taitan.system.pojo.vo.ProductDetailVO;
 import com.taitan.system.service.ProductDetailService;
 import lombok.RequiredArgsConstructor;
@@ -43,6 +44,10 @@ public class ProductDetailServiceImpl extends ServiceImpl<ProductDetailMapper, P
 
     @Override
     public Long updateProductDetail(ProductDetail productDetail) {
+        long count = this.count(new LambdaQueryWrapper<ProductDetail>()
+                .eq(ProductDetail::getId, productDetail.getId())
+        );
+        Assert.isTrue(count != 0, "产品ID不存在");
         this.updateById(productDetail);
         return productDetail.getId();
     }
