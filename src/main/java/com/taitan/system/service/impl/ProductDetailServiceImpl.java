@@ -72,10 +72,12 @@ public class ProductDetailServiceImpl extends ServiceImpl<ProductDetailMapper, P
     }
 
     @Override
-    public List<ProductDetail> getProDetailByUserId(Long userid) {
+    public IPage<ProductDetail> getProDetailByUserId(Long userid, Integer pageNum,Integer pageSize) {
+        IPage<ProductDetail> page = new Page(pageNum, pageSize);
         QueryWrapper<ProductDetail> wrapper = new QueryWrapper<>();
         wrapper.eq("user_id", userid);
-        List<ProductDetail> productList = productDetailMapper.selectList(wrapper);
+        IPage<ProductDetail> productList =this.page(page,wrapper);
+        //List<ProductDetail> productList = productDetailMapper.selectList(wrapper);
         return productList;
     }
 

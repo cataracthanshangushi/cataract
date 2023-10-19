@@ -40,6 +40,7 @@ public class ProductDetail extends BaseEntity {
     private String cover;
     private String proIntroduction;
     private Integer status;
+    private Integer online;
     private String proParameters;
     private String proApplication;
 
