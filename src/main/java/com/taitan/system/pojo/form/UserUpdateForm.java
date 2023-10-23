@@ -43,6 +43,9 @@ public class UserUpdateForm {
     @Schema(description="邮箱")
     private String email;
 
+    @Schema(description="级别")
+    private Long deptId;
+
     @Schema(description="生日")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthday;
