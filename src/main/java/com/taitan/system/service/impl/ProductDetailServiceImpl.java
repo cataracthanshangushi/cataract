@@ -99,4 +99,15 @@ public class ProductDetailServiceImpl extends ServiceImpl<ProductDetailMapper, P
         IPage<ProductDetailVO> productList = productDetailMapper.getProDetailByName(page, name);
         return productList;
     }
+
+    @Override
+    public IPage<ProductDetail> getProDetailVague(Integer pageNum, Integer pageSize, String name, Long category, Integer online) {
+        IPage<ProductDetail> page = new Page(pageNum, pageSize);
+        QueryWrapper<ProductDetail> wrapper = new QueryWrapper<>();
+        wrapper.like("product_name", name);
+        wrapper.eq("category",category);
+        wrapper.eq("online",online);
+        IPage<ProductDetail> productList =this.page(page,wrapper);
+        return productList;
+    }
 }

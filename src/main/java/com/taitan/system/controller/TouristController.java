@@ -92,4 +92,17 @@ public class TouristController {
         IPage<ProductDetailVO> result = productDetailService.getProDetailByName(pageNum,pageSize,productName);
         return Result.success(result);
     }
+
+    @GetMapping("/getProDetailVague")
+    @Operation(summary = "多条件模糊查询产品")
+    public Result getProDetailVague(
+            @Parameter(description = "产品名字") String productName,
+            @Parameter(description = "当前页码") Integer pageNum,
+            @Parameter(description = "每页条数") Integer pageSize,
+            @Parameter(description = "产品分类") Long category,
+            @Parameter(description = "上线状态") Integer online
+    ) {
+        IPage<ProductDetail> result = productDetailService.getProDetailVague(pageNum,pageSize,productName,category,online);
+        return Result.success(result);
+    }
 }

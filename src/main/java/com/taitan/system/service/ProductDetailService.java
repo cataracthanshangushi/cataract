@@ -39,4 +39,6 @@ public interface ProductDetailService extends IService<ProductDetail> {
 
     IPage<ProductDetailVO> getProDetailByName(Integer pageNum, Integer pageSize, String name);
 
+    IPage<ProductDetail> getProDetailVague(Integer pageNum, Integer pageSize, String name,Long category,Integer online);
+
 }
