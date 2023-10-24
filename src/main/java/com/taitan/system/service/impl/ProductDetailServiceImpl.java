@@ -2,6 +2,7 @@ package com.taitan.system.service.impl;
 
 
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -103,11 +104,11 @@ public class ProductDetailServiceImpl extends ServiceImpl<ProductDetailMapper, P
     @Override
     public IPage<ProductDetail> getProDetailVague(Integer pageNum, Integer pageSize, String name, Long category, Integer online) {
         IPage<ProductDetail> page = new Page(pageNum, pageSize);
-        QueryWrapper<ProductDetail> wrapper = new QueryWrapper<>();
-        wrapper.like("product_name", name);
-        wrapper.eq("category",category);
-        wrapper.eq("online",online);
-        IPage<ProductDetail> productList =this.page(page,wrapper);
+        IPage<ProductDetail> productList =this.page(page,new QueryWrapper<ProductDetail>().lambda()
+                .like(StrUtil.isNotBlank(name),ProductDetail::getProductName, name)
+                .eq(ObjectUtil.isNotEmpty(category),ProductDetail::getCategory,category)
+                .eq(ObjectUtil.isNotEmpty(online),ProductDetail::getOnline,online)
+        );
         return productList;
     }
 }
