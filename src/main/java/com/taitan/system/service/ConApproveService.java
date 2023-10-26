@@ -1,7 +1,9 @@
 package com.taitan.system.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taitan.system.pojo.entity.ConApprove;
+import com.taitan.system.pojo.vo.UserPageVO;
 
 import java.util.List;
 
@@ -29,5 +31,8 @@ public interface ConApproveService extends IService<ConApprove> {
 
 
     List<ConApprove> getConApproveByUserId(Long userid);
+
+
+    IPage<ConApprove> getAllConApprove(Integer pageNum, Integer pageSize,Integer statue);
 
 }

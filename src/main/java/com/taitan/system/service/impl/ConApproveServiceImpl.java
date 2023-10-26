@@ -2,12 +2,16 @@ package com.taitan.system.service.impl;
 
 
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taitan.system.mapper.ConApproveMapper;
 import com.taitan.system.pojo.entity.ConApprove;
+import com.taitan.system.pojo.entity.ProductDetail;
 import com.taitan.system.service.ConApproveService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,7 +22,7 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author PB080086
@@ -45,6 +49,7 @@ public class ConApproveServiceImpl extends ServiceImpl<ConApproveMapper, ConAppr
         this.updateById(conApprove);
         return conApprove.getId();
     }
+
     /**
      * 删除
      *
@@ -73,10 +78,19 @@ public class ConApproveServiceImpl extends ServiceImpl<ConApproveMapper, ConAppr
 
     @Override
     public List<ConApprove> getConApproveByUserId(Long userid) {
-        QueryWrapper<ConApprove> wrapper=new QueryWrapper<>();
-        wrapper.eq("user_id",userid);
+        QueryWrapper<ConApprove> wrapper = new QueryWrapper<>();
+        wrapper.eq("user_id", userid);
         List<ConApprove> userList = conApproveMapper.selectList(wrapper);
         return userList;
+    }
+
+    @Override
+    public IPage<ConApprove> getAllConApprove(Integer pageNum, Integer pageSize, Integer status) {
+        IPage<ConApprove> page = new Page(pageNum, pageSize);
+        IPage<ConApprove> ConApproveList = this.page(page, new QueryWrapper<ConApprove>().lambda()
+                .eq(ObjectUtil.isNotEmpty(status), ConApprove::getStatus, status)
+        );
+        return ConApproveList;
     }
 
 

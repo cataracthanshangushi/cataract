@@ -1,5 +1,6 @@
 package com.taitan.system.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taitan.system.common.result.Result;
 import com.taitan.system.pojo.entity.ConApprove;
 import com.taitan.system.service.ConApproveService;
@@ -55,6 +56,17 @@ public class ConApproveController {
     ) {
         List<ConApprove> result = conApproveService.getConApproveByUserId(id);
         return Result.success(result);
+    }
+
+    @GetMapping("/selectAllApprove")
+    @Operation(summary = "查询所有审核信息", security = {@SecurityRequirement(name = "Authorization")})
+    public Result selectAllApprove(
+            @Parameter(description = "审核状态") Integer status,
+            @Parameter(description = "当前页码") Integer pageNum,
+            @Parameter(description = "每页条数") Integer pageSize
+    ) {
+        IPage<ConApprove> allConApprove = conApproveService.getAllConApprove(pageNum, pageSize, status);
+        return Result.success(allConApprove);
     }
 
 }
