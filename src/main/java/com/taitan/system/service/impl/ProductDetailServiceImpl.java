@@ -93,6 +93,10 @@ public class ProductDetailServiceImpl extends ServiceImpl<ProductDetailMapper, P
     public List<ProductDetailVO> getNewProDetail() {
         return productDetailMapper.getNewProDetail();
     }
+    @Override
+    public List<ProductDetailVO> getProDetailByDisPlay(Integer display){
+        return productDetailMapper.getProDetailByDisPlay(display);
+    }
 
     @Override
     public IPage<ProductDetailVO> getProDetailByName(Integer pageNum, Integer pageSize, String name, String subhead) {

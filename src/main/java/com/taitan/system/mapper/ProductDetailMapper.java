@@ -34,4 +34,7 @@ public interface ProductDetailMapper extends BaseMapper<ProductDetail> {
     @Select("SELECT id,product_name,user_id,contact_id,cover,category FROM product_detail WHERE display=1 ORDER BY create_time DESC LIMIT 10")
     List<ProductDetailVO> getNewProDetail();
 
+    @Select("SELECT id,product_name,user_id,contact_id,cover,category FROM product_detail WHERE display=#{display}")
+    List<ProductDetailVO> getProDetailByDisPlay(Integer display);
+
 }

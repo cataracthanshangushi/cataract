@@ -82,7 +82,14 @@ public class TouristController {
         List<ProductDetailVO> result = productDetailService.getNewProDetail();
         return Result.success(result);
     }
-
+    @GetMapping("/getProDetailByDisplay")
+    @Operation(summary = "根据显示状态查询产品")
+    public Result getProDetailByDisplay(
+            @Parameter(description = "显示状态") Integer display
+    ) {
+        List<ProductDetailVO> result = productDetailService.getProDetailByDisPlay(display);
+        return Result.success(result);
+    }
     @GetMapping("/getProDetailByName")
     @Operation(summary = "模糊查询产品")
     public Result getProDetailByName(
