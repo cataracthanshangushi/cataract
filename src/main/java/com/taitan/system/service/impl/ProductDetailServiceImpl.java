@@ -73,12 +73,12 @@ public class ProductDetailServiceImpl extends ServiceImpl<ProductDetailMapper, P
     }
 
     @Override
-    public IPage<ProductDetail> getProDetailByUserId(Long userid, Integer pageNum,Integer pageSize) {
+    public IPage<ProductDetail> getProDetailByUserId(Long userid,Integer online, Integer pageNum,Integer pageSize) {
         IPage<ProductDetail> page = new Page(pageNum, pageSize);
-        QueryWrapper<ProductDetail> wrapper = new QueryWrapper<>();
-        wrapper.eq("user_id", userid);
-        IPage<ProductDetail> productList =this.page(page,wrapper);
-        //List<ProductDetail> productList = productDetailMapper.selectList(wrapper);
+        IPage<ProductDetail> productList =this.page(page,new QueryWrapper<ProductDetail>().lambda()
+                .eq(ObjectUtil.isNotEmpty(userid),ProductDetail::getUserId,userid)
+                .eq(ObjectUtil.isNotEmpty(online),ProductDetail::getOnline,online)
+        );
         return productList;
     }
 
@@ -95,9 +95,9 @@ public class ProductDetailServiceImpl extends ServiceImpl<ProductDetailMapper, P
     }
 
     @Override
-    public IPage<ProductDetailVO> getProDetailByName(Integer pageNum, Integer pageSize, String name) {
+    public IPage<ProductDetailVO> getProDetailByName(Integer pageNum, Integer pageSize, String name, String subhead) {
         IPage<ProductDetailVO> page = new Page(pageNum, pageSize);
-        IPage<ProductDetailVO> productList = productDetailMapper.getProDetailByName(page, name);
+        IPage<ProductDetailVO> productList = productDetailMapper.getProDetailByName(page, name,subhead);
         return productList;
     }
 

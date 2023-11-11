@@ -27,8 +27,9 @@ public interface ProductDetailMapper extends BaseMapper<ProductDetail> {
             ") a where rowid<=10 ")
     List<ProductDetailVO> getProDetail();
 
-    @Select("select id,product_name,user_id,contact_id,cover,category from product_detail where product_name like CONCAT('%',#{name},'%')")
-    IPage<ProductDetailVO> getProDetailByName(IPage<ProductDetailVO> page, String name);
+    @Select("select id,product_name,user_id,contact_id,cover,category from product_detail where product_name " +
+            "like CONCAT('%',#{name},'%') or subheading like CONCAT('%',#{subhead},'%')")
+    IPage<ProductDetailVO> getProDetailByName(IPage<ProductDetailVO> page, String name, String subhead);
 
     @Select("SELECT id,product_name,user_id,contact_id,cover,category FROM product_detail WHERE display=1 ORDER BY create_time DESC LIMIT 10")
     List<ProductDetailVO> getNewProDetail();

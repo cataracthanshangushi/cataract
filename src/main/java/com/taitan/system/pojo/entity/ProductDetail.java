@@ -43,5 +43,6 @@ public class ProductDetail extends BaseEntity {
     private Integer online;
     private String proParameters;
     private String proApplication;
+    private String subheading;
 
 }

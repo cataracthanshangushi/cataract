@@ -30,14 +30,14 @@ public interface ProductDetailService extends IService<ProductDetail> {
     ProductDetail getProductDetail(Long id);
 
 
-    IPage<ProductDetail> getProDetailByUserId(Long userid, Integer pageNum,Integer pageSize);
+    IPage<ProductDetail> getProDetailByUserId(Long userid,Integer online, Integer pageNum,Integer pageSize);
 
 
     Map<Integer, List<ProductDetailVO>> getProDetail();
 
     List<ProductDetailVO> getNewProDetail();
 
-    IPage<ProductDetailVO> getProDetailByName(Integer pageNum, Integer pageSize, String name);
+    IPage<ProductDetailVO> getProDetailByName(Integer pageNum, Integer pageSize, String name, String subhead);
 
     IPage<ProductDetail> getProDetailVague(Integer pageNum, Integer pageSize, String name,Long category,Integer online);
 
