@@ -31,7 +31,7 @@ public interface ProductDetailMapper extends BaseMapper<ProductDetail> {
             "like CONCAT('%',#{name},'%') or subheading like CONCAT('%',#{subhead},'%')")
     IPage<ProductDetailVO> getProDetailByName(IPage<ProductDetailVO> page, String name, String subhead);
 
-    @Select("SELECT id,product_name,user_id,contact_id,cover,category FROM product_detail WHERE display=1 ORDER BY create_time DESC LIMIT 10")
+    @Select("SELECT id,product_name,user_id,contact_id,cover,category FROM product_detail ORDER BY create_time DESC LIMIT 10")
     List<ProductDetailVO> getNewProDetail();
 
     @Select("SELECT id,product_name,user_id,contact_id,cover,category FROM product_detail WHERE display=#{display}")

@@ -57,7 +57,7 @@ minio:
   # 存储桶名称
   bucket-name: default
   # 自定义域名(非必须)，Nginx配置反向代理转发文件路径
-  custom-domain:
+  custom-domain: 1.94.1.236
 
 # springdoc配置： https://springdoc.org/properties.html
 springdoc:
