@@ -21,20 +21,20 @@ import java.util.List;
 @Mapper
 public interface ProductDetailMapper extends BaseMapper<ProductDetail> {
 
-    @Select("select id,product_name,user_id,contact_id,cover,category from (\n" +
+    @Select("select id,product_name,user_id,contact_id,cover,category,subheading from (\n" +
             "select *,row_number() over(PARTITION by category order by id) as rowid \n" +
             "from product_detail where display=1 \n" +
             ") a where rowid<=10 ")
     List<ProductDetailVO> getProDetail();
 
-    @Select("select id,product_name,user_id,contact_id,cover,category from product_detail where product_name " +
+    @Select("select id,product_name,user_id,contact_id,cover,category,subheading from product_detail where product_name " +
             "like CONCAT('%',#{name},'%') or subheading like CONCAT('%',#{subhead},'%')")
     IPage<ProductDetailVO> getProDetailByName(IPage<ProductDetailVO> page, String name, String subhead);
 
-    @Select("SELECT id,product_name,user_id,contact_id,cover,category FROM product_detail ORDER BY create_time DESC LIMIT 10")
+    @Select("SELECT id,product_name,user_id,contact_id,cover,category,subheading FROM product_detail ORDER BY create_time DESC LIMIT 10")
     List<ProductDetailVO> getNewProDetail();
 
-    @Select("SELECT id,product_name,user_id,contact_id,cover,category FROM product_detail WHERE display=#{display}")
+    @Select("SELECT id,product_name,user_id,contact_id,cover,category,subheading FROM product_detail WHERE display=#{display}")
     List<ProductDetailVO> getProDetailByDisPlay(Integer display);
 
 }

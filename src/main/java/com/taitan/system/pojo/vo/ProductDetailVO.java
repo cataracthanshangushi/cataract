@@ -27,4 +27,5 @@ public class ProductDetailVO extends BaseEntity {
     private Long contactId;
     private String cover;
     private Integer category;
+    private String subheading;
 }
