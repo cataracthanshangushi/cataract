@@ -138,13 +138,13 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Transactional
     public boolean updateUser(Long userId, UserUpdateForm userForm) {
 
-        String username = userForm.getUsername();
+        //String username = userForm.getUsername();
 
         long count = this.count(new LambdaQueryWrapper<SysUser>()
-                .eq(SysUser::getUsername, username)
+                //.eq(SysUser::getUsername, username)
                 .eq(SysUser::getId, userId)
         );
-        Assert.isTrue(count != 0, "用户名不存在");
+        Assert.isTrue(count != 0, "用户ID不存在");
 
         // form -> entity
         SysUser entity = userConverter.form2UpEntity(userForm);
