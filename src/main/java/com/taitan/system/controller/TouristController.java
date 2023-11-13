@@ -95,10 +95,11 @@ public class TouristController {
     public Result getProDetailByName(
             @Parameter(description = "产品名字") String productName,
             @Parameter(description = "产品备注") String subhead,
+            @Parameter(description = "是否上线") Integer online,
             @Parameter(description = "当前页码") Integer pageNum,
             @Parameter(description = "每页条数") Integer pageSize
     ) {
-        IPage<ProductDetailVO> result = productDetailService.getProDetailByName(pageNum,pageSize,productName,subhead);
+        IPage<ProductDetailVO> result = productDetailService.getProDetailByName(pageNum,pageSize,productName,subhead,online);
         return Result.success(result);
     }
 

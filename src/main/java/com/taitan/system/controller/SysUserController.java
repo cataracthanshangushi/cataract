@@ -86,7 +86,7 @@ public class SysUserController {
 //    @PreAuthorize("@pms.hasPermission('sys:user:edit')")
     public Result updateUser(
             @Parameter(description = "用户ID") @PathVariable Long userId,
-            @RequestBody @Validated UserUpdateForm userForm) {
+            @RequestBody UserUpdateForm userForm) {
         boolean result = userService.updateUser(userId, userForm);
         return Result.judge(result);
     }
