@@ -23,7 +23,7 @@ public interface ProductDetailMapper extends BaseMapper<ProductDetail> {
 
     @Select("select id,product_name,user_id,contact_id,cover,category,subheading from (\n" +
             "select *,row_number() over(PARTITION by category order by id) as rowid \n" +
-            "from product_detail where display=1 \n" +
+            "from product_detail where display>0 \n" +
             ") a where rowid<=10 ")
     List<ProductDetailVO> getProDetail();
 
