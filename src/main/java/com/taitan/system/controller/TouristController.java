@@ -110,9 +110,10 @@ public class TouristController {
             @Parameter(description = "当前页码") Integer pageNum,
             @Parameter(description = "每页条数") Integer pageSize,
             @Parameter(description = "产品分类") Long category,
-            @Parameter(description = "上线状态") Integer online
+            @Parameter(description = "上线状态") Integer online,
+            @Parameter(description = "用户ID") Long userid
     ) {
-        IPage<ProductDetail> result = productDetailService.getProDetailVague(pageNum,pageSize,productName,category,online);
+        IPage<ProductDetail> result = productDetailService.getProDetailVague(pageNum,pageSize,productName,category,online,userid);
         return Result.success(result);
     }
 }

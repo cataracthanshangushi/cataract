@@ -106,11 +106,12 @@ public class ProductDetailServiceImpl extends ServiceImpl<ProductDetailMapper, P
     }
 
     @Override
-    public IPage<ProductDetail> getProDetailVague(Integer pageNum, Integer pageSize, String name, Long category, Integer online) {
+    public IPage<ProductDetail> getProDetailVague(Integer pageNum, Integer pageSize, String name, Long category, Integer online, Long userid) {
         IPage<ProductDetail> page = new Page(pageNum, pageSize);
         IPage<ProductDetail> productList =this.page(page,new QueryWrapper<ProductDetail>().lambda()
                 .like(StrUtil.isNotBlank(name),ProductDetail::getProductName, name)
                 .eq(ObjectUtil.isNotEmpty(category),ProductDetail::getCategory,category)
+                .eq(ObjectUtil.isNotEmpty(userid),ProductDetail::getUserId,userid)
                 .eq(ObjectUtil.isNotEmpty(online),ProductDetail::getOnline,online)
         );
         return productList;
