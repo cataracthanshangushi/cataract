@@ -1,5 +1,9 @@
 package com.taitan.system.common.util;
 
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
+import com.alipay.api.internal.util.file.IOUtils;
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
@@ -42,19 +46,6 @@ public class HttpClientUtils {
         RequestConfig config = RequestConfig.custom().setConnectTimeout(30000).setSocketTimeout(15000).build();
         httpClient = HttpClientBuilder.create().setDefaultRequestConfig(config).build();
     }
-
-//    public static void main(String[] args) {
-//        try {
-//            // 调用接口： http://127.0.0.1/demo?num=666
-//            String url = "http://127.0.0.1/demo";
-//            Map<String, String> params = new HashMap<String, String>();
-//            params.put("num", "666");
-//            String result = HttpClientUtils.doPost(url, params);
-//            System.out.println("Get request result: \n" + result);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     public static String doGet(String url, Map<String, String> params) {
         return doGet(url, params, CHARSET);
@@ -234,5 +225,37 @@ public class HttpClientUtils {
             e.printStackTrace();
         }
         return HttpClients.createDefault();
+    }
+
+    public static JSONObject getRequestParam(HttpServletRequest request) {
+        // 返回参数
+        JSONObject params = new JSONObject();
+        // 获取内容格式
+        String contentType = request.getContentType();
+        if (contentType != null && !contentType.equals("")) {
+            contentType = contentType.split(";")[0];
+        }
+        // form表单格式  表单形式可以从 ParameterMap中获取
+        if ("appliction/x-www-form-urlencoded".equalsIgnoreCase(contentType)) {
+            // 获取参数
+            Map<String, String[]> parameterMap = request.getParameterMap();
+            if (parameterMap != null) {
+                for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
+                    params.set(entry.getKey(), entry.getValue()[0]);
+                }
+            }
+        }
+        // json格式 json格式需要从request的输入流中解析获取
+        if ("application/json".equalsIgnoreCase(contentType)) {
+            // 使用 commons-io中 IoUtils 类快速获取输入流内容
+            String paramJson = null;
+            try {
+                paramJson = IOUtils.toString(request.getInputStream(), "UTF-8");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            params.putAll(JSONUtil.parseObj(paramJson));
+        }
+        return params;
     }
 }
