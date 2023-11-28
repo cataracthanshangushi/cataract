@@ -36,5 +36,6 @@ public class ProContact extends BaseEntity {
     private String contactWechat;
     private String contactPost;
     private String comIntroduction;
+    private Integer status;
 
 }
