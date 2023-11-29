@@ -61,11 +61,12 @@ public class TouristController {
     @Operation(summary = "通过登录人获取产品", security = {@SecurityRequirement(name = "Authorization")})
     public Result selectProDetailByUserId(
             @Parameter(description = "登录人ID") Long id,
+            @Parameter(description = "名片ID") Long contactId,
             @Parameter(description = "上线状态") Integer online,
             @Parameter(description = "当前页码") Integer pageNum,
             @Parameter(description = "每页条数") Integer pageSize
     ) {
-        IPage<ProductDetail> result = productDetailService.getProDetailByUserId(id,online,pageNum,pageSize);
+        IPage<ProductDetail> result = productDetailService.getProDetailByUserId(id,contactId,online,pageNum,pageSize);
         return Result.success(result);
     }
 

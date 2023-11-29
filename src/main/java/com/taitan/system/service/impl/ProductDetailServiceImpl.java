@@ -73,10 +73,11 @@ public class ProductDetailServiceImpl extends ServiceImpl<ProductDetailMapper, P
     }
 
     @Override
-    public IPage<ProductDetail> getProDetailByUserId(Long userid,Integer online, Integer pageNum,Integer pageSize) {
+    public IPage<ProductDetail> getProDetailByUserId(Long userid,Long contactId,Integer online, Integer pageNum,Integer pageSize) {
         IPage<ProductDetail> page = new Page(pageNum, pageSize);
         IPage<ProductDetail> productList =this.page(page,new QueryWrapper<ProductDetail>().lambda()
                 .eq(ObjectUtil.isNotEmpty(userid),ProductDetail::getUserId,userid)
+                .eq(ObjectUtil.isNotEmpty(contactId),ProductDetail::getContactId,contactId)
                 .eq(ObjectUtil.isNotEmpty(online),ProductDetail::getOnline,online)
         );
         return productList;

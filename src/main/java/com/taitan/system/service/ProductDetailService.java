@@ -30,7 +30,7 @@ public interface ProductDetailService extends IService<ProductDetail> {
     ProductDetail getProductDetail(Long id);
 
 
-    IPage<ProductDetail> getProDetailByUserId(Long userid,Integer online, Integer pageNum,Integer pageSize);
+    IPage<ProductDetail> getProDetailByUserId(Long userid,Long contactId,Integer online, Integer pageNum,Integer pageSize);
 
 
     Map<Integer, List<ProductDetailVO>> getProDetail();
