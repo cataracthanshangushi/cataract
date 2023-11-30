@@ -2,17 +2,19 @@ package com.taitan.system.controller;
 
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.taitan.system.common.result.Result;
 import com.taitan.system.pojo.entity.ProContact;
 import com.taitan.system.pojo.entity.ProductDetail;
+import com.taitan.system.pojo.entity.UserFeedback;
 import com.taitan.system.pojo.vo.ProductDetailVO;
 import com.taitan.system.service.ProContactService;
 import com.taitan.system.service.ProductDetailService;
+import com.taitan.system.service.UserFeedbackService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +31,8 @@ public class TouristController {
     private final ProContactService proContactService;
 
     private final ProductDetailService productDetailService;
+
+    private final UserFeedbackService userFeedbackService;
 
     @GetMapping("/selectProConById")
     @Operation(summary = "选择产品人", security = {@SecurityRequirement(name = "Authorization")})
@@ -115,6 +119,15 @@ public class TouristController {
             @Parameter(description = "用户ID") Long userid
     ) {
         IPage<ProductDetail> result = productDetailService.getProDetailVague(pageNum,pageSize,productName,category,online,userid);
+        return Result.success(result);
+    }
+
+    @PostMapping("/submitComment")
+    @Operation(summary = "提交意见")
+    public Result submitComment(
+            @RequestBody @Valid UserFeedback userFeedback
+    ) {
+        Long result = userFeedbackService.saveUserFeedback(userFeedback);
         return Result.success(result);
     }
 }
