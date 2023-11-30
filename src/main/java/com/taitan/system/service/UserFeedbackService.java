@@ -1,5 +1,6 @@
 package com.taitan.system.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taitan.system.pojo.entity.UserFeedback;
 
@@ -28,6 +29,6 @@ public interface UserFeedbackService extends IService<UserFeedback> {
     UserFeedback getUserFeedback(Long id);
 
 
-    List<UserFeedback> getUserFeedbackByUserId(Long userid);
+    IPage<UserFeedback> getUserFeedbackList(Integer pageNum, Integer pageSize);
 
 }

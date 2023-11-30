@@ -2,11 +2,15 @@ package com.taitan.system.service.impl;
 
 
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taitan.system.mapper.UserFeedbackMapper;
+import com.taitan.system.pojo.entity.ProductDetail;
 import com.taitan.system.pojo.entity.UserFeedback;
 import com.taitan.system.service.UserFeedbackService;
 import lombok.RequiredArgsConstructor;
@@ -72,11 +76,9 @@ public class UserFeedbackServiceImpl extends ServiceImpl<UserFeedbackMapper, Use
     }
 
     @Override
-    public List<UserFeedback> getUserFeedbackByUserId(Long userid) {
-        QueryWrapper<UserFeedback> wrapper=new QueryWrapper<>();
-        wrapper.eq("user_id",userid);
-        List<UserFeedback> userList = UserFeedbackMapper.selectList(wrapper);
-        return userList;
+    public IPage<UserFeedback> getUserFeedbackList(Integer pageNum,Integer pageSize) {
+        IPage<UserFeedback> page = new Page(pageNum, pageSize);
+        return this.page(page);
     }
 
 

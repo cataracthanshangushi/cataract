@@ -130,4 +130,23 @@ public class TouristController {
         Long result = userFeedbackService.saveUserFeedback(userFeedback);
         return Result.success(result);
     }
+
+    @GetMapping("/deleteComment")
+    @Operation(summary = "删除意见")
+    public Result deleteComment(
+            @Parameter(description = "id") String ids
+    ) {
+        boolean result = userFeedbackService.deleteByIds(ids);
+        return Result.judge(result);
+    }
+
+    @GetMapping("/selectComment")
+    @Operation(summary = "查询意见")
+    public Result selectComment(
+            @Parameter(description = "当前页码") Integer pageNum,
+            @Parameter(description = "每页条数") Integer pageSize
+    ) {
+        IPage<UserFeedback> result = userFeedbackService.getUserFeedbackList(pageNum,pageSize);
+        return Result.success(result);
+    }
 }
