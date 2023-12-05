@@ -5,16 +5,13 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taitan.system.common.result.Result;
 import com.taitan.system.pojo.entity.ProContact;
 import com.taitan.system.pojo.entity.ProductDetail;
-import com.taitan.system.pojo.entity.UserFeedback;
 import com.taitan.system.pojo.vo.ProductDetailVO;
 import com.taitan.system.service.ProContactService;
 import com.taitan.system.service.ProductDetailService;
-import com.taitan.system.service.UserFeedbackService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,8 +28,6 @@ public class TouristController {
     private final ProContactService proContactService;
 
     private final ProductDetailService productDetailService;
-
-    private final UserFeedbackService userFeedbackService;
 
     @GetMapping("/selectProConById")
     @Operation(summary = "选择产品人", security = {@SecurityRequirement(name = "Authorization")})
@@ -122,31 +117,4 @@ public class TouristController {
         return Result.success(result);
     }
 
-    @PostMapping("/submitComment")
-    @Operation(summary = "提交意见")
-    public Result submitComment(
-            @RequestBody @Valid UserFeedback userFeedback
-    ) {
-        Long result = userFeedbackService.saveUserFeedback(userFeedback);
-        return Result.success(result);
-    }
-
-    @GetMapping("/deleteComment")
-    @Operation(summary = "删除意见")
-    public Result deleteComment(
-            @Parameter(description = "id") String ids
-    ) {
-        boolean result = userFeedbackService.deleteByIds(ids);
-        return Result.judge(result);
-    }
-
-    @GetMapping("/selectComment")
-    @Operation(summary = "查询意见")
-    public Result selectComment(
-            @Parameter(description = "当前页码") Integer pageNum,
-            @Parameter(description = "每页条数") Integer pageSize
-    ) {
-        IPage<UserFeedback> result = userFeedbackService.getUserFeedbackList(pageNum,pageSize);
-        return Result.success(result);
-    }
 }
