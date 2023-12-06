@@ -19,7 +19,7 @@ import java.util.List;
 @Mapper
 public interface ProCollectMapper extends BaseMapper<ProCollect> {
 
-    @Select("select b.id,b.user_id,b.product_name,b.contact_id,b.cover,b.category,b.subheading,b.online " +
+    @Select("select b.id,b.user_id,b.product_name,b.contact_id,b.cover,b.category,b.subheading,b.online,b.status " +
             "from pro_collect a LEFT JOIN product_detail b ON a.pro_id=b.id WHERE a.user_id=#{userId}")
     List<ProductDetailVO> getProDetailByCol(Long userId);
 
