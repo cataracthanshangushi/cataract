@@ -29,4 +29,5 @@ public class ProductDetailVO extends BaseEntity {
     private Integer category;
     private String subheading;
     private Integer online;
+    private Integer status;
 }
