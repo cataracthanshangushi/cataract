@@ -61,6 +61,6 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
     List<UserExportVO> listExportUsers(UserPageQuery queryParams);
 
     @Select("select id as userId,username,nickname,avatar,birthday,gender,email,occupation,profession,dept_id,mobile from sys_user where username " +
-            "like CONCAT('%',#{name},'%')")
+            "like CONCAT('%',#{name},'%') or IsNull(#{name})")
     IPage<UserInfoVO> getListUsers(IPage<UserInfoVO> page, String name);
 }
