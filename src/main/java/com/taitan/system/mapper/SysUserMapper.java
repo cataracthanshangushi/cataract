@@ -1,6 +1,7 @@
 package com.taitan.system.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.taitan.system.framework.mybatisplus.DataPermission;
 import com.taitan.system.pojo.bo.UserBO;
@@ -9,7 +10,9 @@ import com.taitan.system.pojo.bo.UserAuthInfo;
 import com.taitan.system.pojo.bo.UserFormBO;
 import com.taitan.system.pojo.query.UserPageQuery;
 import com.taitan.system.pojo.vo.UserExportVO;
+import com.taitan.system.pojo.vo.UserInfoVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -56,4 +59,8 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
      */
     @DataPermission(deptAlias = "u")
     List<UserExportVO> listExportUsers(UserPageQuery queryParams);
+
+    @Select("select id as userId,username,nickname,avatar,birthday,gender,email,occupation,profession,dept_id,mobile from sys_user where username " +
+            "like CONCAT('%',#{name},'%')")
+    IPage<UserInfoVO> getListUsers(IPage<UserInfoVO> page, String name);
 }

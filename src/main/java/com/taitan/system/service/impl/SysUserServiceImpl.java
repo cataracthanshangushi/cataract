@@ -20,6 +20,7 @@ import com.taitan.system.pojo.entity.SysUser;
 import com.taitan.system.pojo.form.UserForm;
 import com.taitan.system.pojo.form.UserUpdateForm;
 import com.taitan.system.pojo.query.UserPageQuery;
+import com.taitan.system.pojo.vo.ProductDetailVO;
 import com.taitan.system.pojo.vo.UserExportVO;
 import com.taitan.system.pojo.vo.UserInfoVO;
 import com.taitan.system.pojo.vo.UserPageVO;
@@ -205,6 +206,13 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         );
 
         return result;
+    }
+
+    @Override
+    public IPage<UserInfoVO> getListUsers(Integer pageNum, Integer pageSize, String name) {
+        IPage<UserInfoVO> page = new Page(pageNum, pageSize);
+        IPage<UserInfoVO> userList = this.baseMapper.getListUsers(page, name);
+        return userList;
     }
 
     /**

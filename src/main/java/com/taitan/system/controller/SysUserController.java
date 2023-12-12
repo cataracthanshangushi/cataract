@@ -9,6 +9,7 @@ import com.taitan.system.common.result.PageResult;
 import com.taitan.system.common.result.Result;
 import com.taitan.system.common.util.ExcelUtils;
 import com.taitan.system.listener.UserImportListener;
+import com.taitan.system.pojo.entity.ProFeedback;
 import com.taitan.system.pojo.form.UserUpdateForm;
 import com.taitan.system.pojo.vo.UserImportVO;
 import com.taitan.system.pojo.form.UserForm;
@@ -165,5 +166,16 @@ public class SysUserController {
         List<UserExportVO> exportUserList = userService.listExportUsers(queryParams);
         EasyExcel.write(response.getOutputStream(), UserExportVO.class).sheet("用户列表")
                 .doWrite(exportUserList);
+    }
+
+    @Operation(summary = "查询用户", security = {@SecurityRequirement(name = "Authorization")})
+    @GetMapping("/selectUser")
+    public Result selectUser(
+            @Parameter(description = "用户名") String name,
+            @Parameter(description = "当前页码") Integer pageNum,
+            @Parameter(description = "每页条数") Integer pageSize
+    )  {
+        IPage<UserInfoVO> result = userService.getListUsers(pageNum,pageSize,name);
+        return Result.success(result);
     }
 }

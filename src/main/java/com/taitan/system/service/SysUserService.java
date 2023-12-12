@@ -109,4 +109,6 @@ public interface SysUserService extends IService<SysUser> {
     boolean checkUserName(String username);
 
     boolean updatePasswordByName(String username, String password);
+
+    IPage<UserInfoVO> getListUsers(Integer pageNum, Integer pageSize, String name);
 }
