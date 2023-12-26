@@ -4,9 +4,11 @@ package com.taitan.system.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taitan.system.common.result.Result;
 import com.taitan.system.pojo.entity.ProContact;
+import com.taitan.system.pojo.entity.ProCounter;
 import com.taitan.system.pojo.entity.ProductDetail;
 import com.taitan.system.pojo.vo.ProductDetailVO;
 import com.taitan.system.service.ProContactService;
+import com.taitan.system.service.ProCounterService;
 import com.taitan.system.service.ProductDetailService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -28,6 +30,8 @@ public class TouristController {
     private final ProContactService proContactService;
 
     private final ProductDetailService productDetailService;
+
+    private final ProCounterService proCounterService;
 
     @GetMapping("/selectProConById")
     @Operation(summary = "选择产品人", security = {@SecurityRequirement(name = "Authorization")})
@@ -117,4 +121,21 @@ public class TouristController {
         return Result.success(result);
     }
 
+    @GetMapping("/addProCounter")
+    @Operation(summary = "浏览统计增加")
+    public Result addProCounter(
+            @Parameter(description = "产品ID") Long proId
+    ) {
+        Long result = proCounterService.addProCounter(proId);
+        return Result.success(result);
+    }
+
+    @GetMapping("/getProCounter")
+    @Operation(summary = "查看统计")
+    public Result getProCounter(
+            @Parameter(description = "产品ID") Long proId
+    ) {
+        ProCounter result = proCounterService.getProCounter(proId);
+        return Result.success(result);
+    }
 }
