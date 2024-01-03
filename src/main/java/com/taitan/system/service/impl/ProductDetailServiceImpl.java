@@ -79,6 +79,8 @@ public class ProductDetailServiceImpl extends ServiceImpl<ProductDetailMapper, P
                 .eq(ObjectUtil.isNotEmpty(userid),ProductDetail::getUserId,userid)
                 .eq(ObjectUtil.isNotEmpty(contactId),ProductDetail::getContactId,contactId)
                 .eq(ObjectUtil.isNotEmpty(online),ProductDetail::getOnline,online)
+                .orderByDesc(ProductDetail::getCreateTime)
+
         );
         return productList;
     }
