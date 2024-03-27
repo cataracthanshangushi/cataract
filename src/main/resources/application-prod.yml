@@ -12,7 +12,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/youlai_boot?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&autoReconnect=true&allowMultiQueries=true
     username: root
-    password: 123456
+    password: quzou123456
   data:
     redis:
       database: 6
@@ -52,8 +52,8 @@ auth:
 # MinIO 分布式文件系统
 minio:
   endpoint: http://www.taitan.tech:9000
-  access-key: minioadmin
-  secret-key: youlaitech
+  access-key: minioquzou
+  secret-key: minioquzou
   bucket-name: taitan-boot
   # 自定义域名(非必须)，Nginx配置反向代理转发文件路径
   custom-domain: https://oss.taitan.tech

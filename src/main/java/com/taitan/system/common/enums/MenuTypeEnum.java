@@ -32,4 +32,5 @@ public enum MenuTypeEnum implements IBaseEnum<Integer> {
         this.label = label;
     }
 
+
 }
